@@ -1,0 +1,107 @@
+[{
+  "_id": {
+    "$oid": "6868fbc640e5b63db42c42c9"
+  },
+  "username": "arpitapradhan0216",
+  "email": "arpitapradhan0216@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$rr/PhWTbUKZD6e8Xx4BoEg$a9PBpkQjEchKd++o7TElYvY/euhq6Z8w0QLt0E/pHH4",
+  "role": "user",
+  "isEmailVerified": false,
+  "isPhoneVerified": false,
+  "isDeleted": false,
+  "isDeactivated": false,
+  "isBan": false,
+  "createdAt": {
+    "$date": "2025-07-05T10:17:42.013Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-05T10:17:42.013Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686bbd286b1ca4d22be618fb"
+  },
+  "username": "arpita.pradhan",
+  "email": "arpita.pradhan@loyaltty.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$J5Mlbi5XPfMnUBtA9JQOzQ$KZcoBmsL9NZRpsYDmP6AUTvwKaHL8UFdR6jKJ5TW94g",
+  "role": "user",
+  "isEmailVerified": true,
+  "isPhoneVerified": false,
+  "isDeleted": false,
+  "isDeactivated": false,
+  "isBan": false,
+  "createdAt": {
+    "$date": "2025-07-07T12:27:20.462Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T12:38:45.911Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686cf9cdfb4457602eab2861"
+  },
+  "username": "partharocking4u",
+  "email": "partharocking4u@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$HDTesmIHLCPFI+gkCEJVqQ$b5YiUMT79wSykPrJfMXfG3BEPM/4g3wgYPEYc1bwNO0",
+  "role": "user",
+  "isEmailVerified": true,
+  "isPhoneVerified": false,
+  "isDeleted": false,
+  "isDeactivated": false,
+  "isBan": false,
+  "createdAt": {
+    "$date": "2025-07-08T10:58:21.736Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-08T10:58:48.172Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686e4ff481331ee09559cf3c"
+  },
+  "username": "aksbhabua09",
+  "firstName": "Digvijay Bahadur",
+  "lastName": "Singh",
+  "email": "aksbhabua09@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$sjliSh6iNovUz+r51wTTCA$gMav1yzQVaAVokjLAdoC8lQcopIsfgSi/x1Z1M6++mw",
+  "role": "user",
+  "isEmailVerified": true,
+  "isPhoneVerified": false,
+  "isDeleted": false,
+  "isDeactivated": false,
+  "isBan": false,
+  "createdAt": {
+    "$date": "2025-07-09T11:18:12.546Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-09T11:18:12.546Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6870cc61d94fb7565374015f"
+  },
+  "username": "digvijay.singh",
+  "email": "digvijay.singh@loyaltty.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$cup6mnfGj/3aQCKN/jdkvQ$y5sF2SnOUdq9vDf9fAC7MrwIgGJdZUnQk80+DVtXahQ",
+  "role": "user",
+  "isEmailVerified": true,
+  "isPhoneVerified": false,
+  "isDeleted": false,
+  "isDeactivated": false,
+  "isBan": false,
+  "createdAt": {
+    "$date": "2025-07-11T08:33:37.243Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-11T08:33:37.243Z"
+  },
+  "__v": 0
+}]

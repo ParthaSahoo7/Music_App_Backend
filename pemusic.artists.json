@@ -1,0 +1,366 @@
+[{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcecb"
+  },
+  "name": "Luna Star",
+  "bio": "Indie pop sensation with a passion for storytelling through music.",
+  "profilePicture": "https://example.com/profiles/luna-star.jpg",
+  "socialLinks": {
+    "twitter": "https://twitter.com/lunastar",
+    "instagram": "https://instagram.com/lunastar"
+  },
+  "media": [
+    "6870fd4cef75ca0909edceb4",
+    "6870fd4cef75ca0909edceb5"
+  ],
+  "genres": [
+    "Pop",
+    "Indie"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcecc"
+  },
+  "name": "Echo Pulse",
+  "bio": "Electronic music duo creating immersive soundscapes.",
+  "profilePicture": "https://example.com/profiles/echo-pulse.jpg",
+  "socialLinks": {
+    "youtube": "https://youtube.com/echopulse"
+  },
+  "media": [
+    "6870fd4cef75ca0909edceb8"
+  ],
+  "genres": [
+    "Electronic",
+    "Ambient"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcecd"
+  },
+  "name": "Jasper Reed",
+  "bio": "Soulful jazz artist with a modern twist.",
+  "profilePicture": "https://example.com/profiles/jasper-reed.jpg",
+  "socialLinks": {
+    "spotify": "https://spotify.com/jasperreed"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcec1"
+  ],
+  "genres": [
+    "Jazz",
+    "Soul"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcece"
+  },
+  "name": "Violet Haze",
+  "bio": "Rock band known for high-energy performances.",
+  "profilePicture": "https://example.com/profiles/violet-haze.jpg",
+  "socialLinks": {
+    "instagram": "https://instagram.com/violethaze"
+  },
+  "media": [
+    "6870fd4cef75ca0909edceb7"
+  ],
+  "genres": [
+    "Rock",
+    "Alternative"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcecf"
+  },
+  "name": "Skye Harmony",
+  "bio": "Folk singer-songwriter with heartfelt lyrics.",
+  "profilePicture": "https://example.com/profiles/skye-harmony.jpg",
+  "socialLinks": {
+    "twitter": "https://twitter.com/skyeharmony"
+  },
+  "media": [],
+  "genres": [
+    "Folk",
+    "Acoustic"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced0"
+  },
+  "name": "Neon Drift",
+  "bio": "Synthwave artist inspired by 80s nostalgia.",
+  "profilePicture": "https://example.com/profiles/neon-drift.jpg",
+  "socialLinks": {
+    "soundcloud": "https://soundcloud.com/neondrift"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcebe"
+  ],
+  "genres": [
+    "Synthwave",
+    "Electronic"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced1"
+  },
+  "name": "Aurora Vibe",
+  "bio": "Pop artist with vibrant and catchy melodies.",
+  "profilePicture": "https://example.com/profiles/aurora-vibe.jpg",
+  "socialLinks": {
+    "instagram": "https://instagram.com/auroravibe"
+  },
+  "media": [],
+  "genres": [
+    "Pop",
+    "Dance"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced2"
+  },
+  "name": "Crimson Wave",
+  "bio": "Punk rock band with raw energy.",
+  "profilePicture": "https://example.com/profiles/crimson-wave.jpg",
+  "socialLinks": {
+    "bandcamp": "https://crimsonwave.bandcamp.com"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcebb"
+  ],
+  "genres": [
+    "Punk",
+    "Rock"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced3"
+  },
+  "name": "Mystic Chord",
+  "bio": "Experimental artist blending classical and electronic.",
+  "profilePicture": "https://example.com/profiles/mystic-chord.jpg",
+  "socialLinks": {
+    "twitter": "https://twitter.com/mysticchord"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcec7"
+  ],
+  "genres": [
+    "Experimental",
+    "Classical"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced4"
+  },
+  "name": "Solar Flare",
+  "bio": "Hip-hop artist with powerful lyrics.",
+  "profilePicture": "https://example.com/profiles/solar-flare.jpg",
+  "socialLinks": {
+    "spotify": "https://spotify.com/solarflare"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcec4"
+  ],
+  "genres": [
+    "Hip-Hop",
+    "Rap"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced5"
+  },
+  "name": "Twilight Echo",
+  "bio": "Indie folk duo with harmonious melodies.",
+  "profilePicture": "https://example.com/profiles/twilight-echo.jpg",
+  "socialLinks": {
+    "instagram": "https://instagram.com/twilightecho"
+  },
+  "media": [],
+  "genres": [
+    "Folk",
+    "Indie"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced6"
+  },
+  "name": "Nova Spark",
+  "bio": "Electronic dance music producer.",
+  "profilePicture": "https://example.com/profiles/nova-spark.jpg",
+  "socialLinks": {
+    "soundcloud": "https://soundcloud.com/novaspark"
+  },
+  "media": [],
+  "genres": [
+    "EDM",
+    "Electronic"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced7"
+  },
+  "name": "Ember Glow",
+  "bio": "R&B artist with soulful vibes.",
+  "profilePicture": "https://example.com/profiles/ember-glow.jpg",
+  "socialLinks": {
+    "youtube": "https://youtube.com/emberglow"
+  },
+  "media": [],
+  "genres": [
+    "R&B",
+    "Soul"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced8"
+  },
+  "name": "Starlight Anthem",
+  "bio": "Pop-rock band with anthemic songs.",
+  "profilePicture": "https://example.com/profiles/starlight-anthem.jpg",
+  "socialLinks": {
+    "twitter": "https://twitter.com/starlightanthem"
+  },
+  "media": [
+    "6870fd4cef75ca0909edceba"
+  ],
+  "genres": [
+    "Pop",
+    "Rock"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edced9"
+  },
+  "name": "Ocean Riff",
+  "bio": "Surf rock band with a coastal vibe.",
+  "profilePicture": "https://example.com/profiles/ocean-riff.jpg",
+  "socialLinks": {
+    "instagram": "https://instagram.com/oceanriff"
+  },
+  "media": [],
+  "genres": [
+    "Surf Rock",
+    "Indie"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edceda"
+  },
+  "name": "Shadow Beat",
+  "bio": "Hip-hop producer with cinematic beats.",
+  "profilePicture": "https://example.com/profiles/shadow-beat.jpg",
+  "socialLinks": {
+    "spotify": "https://spotify.com/shadowbeat"
+  },
+  "media": [],
+  "genres": [
+    "Hip-Hop",
+    "Instrumental"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcedb"
+  },
+  "name": "Velvet Moon",
+  "bio": "Jazz vocalist with a timeless style.",
+  "profilePicture": "https://example.com/profiles/velvet-moon.jpg",
+  "socialLinks": {
+    "youtube": "https://youtube.com/velvetmoon"
+  },
+  "media": [],
+  "genres": [
+    "Jazz",
+    "Vocal"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcedc"
+  },
+  "name": "Blaze Tempo",
+  "bio": "Latin pop artist with infectious rhythms.",
+  "profilePicture": "https://example.com/profiles/blaze-tempo.jpg",
+  "socialLinks": {
+    "instagram": "https://instagram.com/blazetempo"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcec0"
+  ],
+  "genres": [
+    "Latin Pop",
+    "Dance"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcedd"
+  },
+  "name": "Frost Melody",
+  "bio": "Ambient artist creating serene soundscapes.",
+  "profilePicture": "https://example.com/profiles/frost-melody.jpg",
+  "socialLinks": {
+    "soundcloud": "https://soundcloud.com/frostmelody"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcebd"
+  ],
+  "genres": [
+    "Ambient",
+    "Electronic"
+  ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "68720c6def75ca0909edcede"
+  },
+  "name": "Radiant Pulse",
+  "bio": "Dance pop artist with uplifting tracks.",
+  "profilePicture": "https://example.com/profiles/radiant-pulse.jpg",
+  "socialLinks": {
+    "twitter": "https://twitter.com/radiantpulse"
+  },
+  "media": [
+    "6870fd4cef75ca0909edcec6"
+  ],
+  "genres": [
+    "Pop",
+    "Dance"
+  ],
+  "isActive": true
+}]

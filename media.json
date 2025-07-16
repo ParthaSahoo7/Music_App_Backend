@@ -1,0 +1,122 @@
+[
+  {
+    "userId": "6868fbc640e5b63db42c42c9",
+    "artistId": "68720c6def75ca0909edcecb",
+    "followedAt": "2025-07-01T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6868fbc640e5b63db42c42c9",
+    "artistId": "68720c6def75ca0909edcecc",
+    "followedAt": "2025-07-02T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6868fbc640e5b63db42c42c9",
+    "artistId": "68720c6def75ca0909edcecd",
+    "followedAt": "2025-07-03T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6868fbc640e5b63db42c42c9",
+    "artistId": "68720c6def75ca0909edcece",
+    "followedAt": "2025-07-04T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686bbd286b1ca4d22be618fb",
+    "artistId": "68720c6def75ca0909edcecb",
+    "followedAt": "2025-07-05T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686bbd286b1ca4d22be618fb",
+    "artistId": "68720c6def75ca0909edcecf",
+    "followedAt": "2025-07-06T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686bbd286b1ca4d22be618fb",
+    "artistId": "68720c6def75ca0909edced0",
+    "followedAt": "2025-07-07T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686bbd286b1ca4d22be618fb",
+    "artistId": "68720c6def75ca0909edced1",
+    "followedAt": "2025-07-08T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686cf9cdfb4457602eab2861",
+    "artistId": "68720c6def75ca0909edcecc",
+    "followedAt": "2025-07-09T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686cf9cdfb4457602eab2861",
+    "artistId": "68720c6def75ca0909edced2",
+    "followedAt": "2025-07-10T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686cf9cdfb4457602eab2861",
+    "artistId": "68720c6def75ca0909edced3",
+    "followedAt": "2025-07-11T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686cf9cdfb4457602eab2861",
+    "artistId": "68720c6def75ca0909edced4",
+    "followedAt": "2025-07-12T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686e4ff481331ee09559cf3c",
+    "artistId": "68720c6def75ca0909edcecd",
+    "followedAt": "2025-07-13T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686e4ff481331ee09559cf3c",
+    "artistId": "68720c6def75ca0909edced5",
+    "followedAt": "2025-07-14T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686e4ff481331ee09559cf3c",
+    "artistId": "68720c6def75ca0909edced6",
+    "followedAt": "2025-07-15T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "686e4ff481331ee09559cf3c",
+    "artistId": "68720c6def75ca0909edced7",
+    "followedAt": "2025-07-16T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6870cc61d94fb7565374015f",
+    "artistId": "68720c6def75ca0909edcece",
+    "followedAt": "2025-07-17T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6870cc61d94fb7565374015f",
+    "artistId": "68720c6def75ca0909edced8",
+    "followedAt": "2025-07-18T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6870cc61d94fb7565374015f",
+    "artistId": "68720c6def75ca0909edced9",
+    "followedAt": "2025-07-19T00:00:00.000Z",
+    "isActive": true
+  },
+  {
+    "userId": "6870cc61d94fb7565374015f",
+    "artistId": "68720c6def75ca0909edceda",
+    "followedAt": "2025-07-20T00:00:00.000Z",
+    "isActive": true
+  }
+]

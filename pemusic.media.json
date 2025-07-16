@@ -1,0 +1,760 @@
+[{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceb4"
+  },
+  "title": "The Cosmic Journey",
+  "description": "A sci-fi adventure exploring distant galaxies.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/cosmic_journey.mp4",
+  "s3KeyOriginal": "media/cosmic_journey_001.mp4",
+  "uploadId": "upload_001",
+  "duration": 7200,
+  "uploadedBy": "507f1f77bcf86cd799439011",
+  "uploaderType": "artist",
+  "genres": [
+    "Sci-Fi",
+    "Adventure"
+  ],
+  "tags": [
+    "space",
+    "exploration",
+    "futuristic"
+  ],
+  "releaseDate": "2024-03-15",
+  "language": "English",
+  "ageRating": "PG-13",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_001",
+  "captionsUrl": "https://example.com/captions/cosmic_journey.vtt",
+  "views": 1500,
+  "likeCount": 300,
+  "dislikeCount": 20,
+  "sharesCount": 50
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceb5"
+  },
+  "title": "Summer Vibes",
+  "description": "Upbeat pop music for summer days.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/summer_vibes.mp3",
+  "s3KeyOriginal": "media/summer_vibes_002.mp3",
+  "uploadId": "upload_002",
+  "duration": 210,
+  "uploadedBy": "507f1f77bcf86cd799439012",
+  "uploaderType": "artist",
+  "genres": [
+    "Pop",
+    "Dance"
+  ],
+  "tags": [
+    "summer",
+    "upbeat",
+    "party"
+  ],
+  "releaseDate": "2025-06-01",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_002",
+  "captionsUrl": null,
+  "views": 800,
+  "likeCount": 150,
+  "dislikeCount": 10,
+  "sharesCount": 30
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceb6"
+  },
+  "title": "Tech Talk Episode 1",
+  "description": "Discussing the future of AI with industry experts.",
+  "type": "podcast",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/tech_talk_1.mp3",
+  "s3KeyOriginal": "media/tech_talk_1_003.mp3",
+  "uploadId": "upload_003",
+  "duration": 3600,
+  "uploadedBy": "507f1f77bcf86cd799439013",
+  "uploaderType": "admin",
+  "genres": [
+    "Technology",
+    "Education"
+  ],
+  "tags": [
+    "AI",
+    "tech",
+    "future"
+  ],
+  "releaseDate": "2025-01-10",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": true,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_003",
+  "captionsUrl": "https://example.com/captions/tech_talk_1.vtt",
+  "views": 500,
+  "likeCount": 100,
+  "dislikeCount": 5,
+  "sharesCount": 20
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceb7"
+  },
+  "title": "El Viaje",
+  "description": "A romantic drama set in Spain.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/el_viaje.mp4",
+  "s3KeyOriginal": "media/el_viaje_004.mp4",
+  "uploadId": "upload_004",
+  "duration": 6600,
+  "uploadedBy": "507f1f77bcf86cd799439014",
+  "uploaderType": "artist",
+  "genres": [
+    "Drama",
+    "Romance"
+  ],
+  "tags": [
+    "love",
+    "travel",
+    "spain"
+  ],
+  "releaseDate": "2023-11-20",
+  "language": "Spanish",
+  "ageRating": "R",
+  "isActive": true,
+  "visibility": "private",
+  "isPublished": false,
+  "isPremium": true,
+  "transcodingStatus": "processing",
+  "mediaConvertJobId": "job_004",
+  "captionsUrl": null,
+  "views": 100,
+  "likeCount": 20,
+  "dislikeCount": 2,
+  "sharesCount": 5
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceb8"
+  },
+  "title": "Midnight Blues",
+  "description": "Soulful blues track for late-night vibes.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/midnight_blues.mp3",
+  "s3KeyOriginal": "media/midnight_blues_005.mp3",
+  "uploadId": "upload_005",
+  "duration": 240,
+  "uploadedBy": "507f1f77bcf86cd799439015",
+  "uploaderType": "artist",
+  "genres": [
+    "Blues",
+    "Jazz"
+  ],
+  "tags": [
+    "night",
+    "relax",
+    "soulful"
+  ],
+  "releaseDate": "2024-09-05",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_005",
+  "captionsUrl": null,
+  "views": 600,
+  "likeCount": 120,
+  "dislikeCount": 8,
+  "sharesCount": 15
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceb9"
+  },
+  "title": "History Uncovered",
+  "description": "Exploring ancient civilizations in depth.",
+  "type": "podcast",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/history_uncovered.mp3",
+  "s3KeyOriginal": "media/history_uncovered_006.mp3",
+  "uploadId": "upload_006",
+  "duration": 2700,
+  "uploadedBy": "507f1f77bcf86cd799439016",
+  "uploaderType": "admin",
+  "genres": [
+    "History",
+    "Education"
+  ],
+  "tags": [
+    "ancient",
+    "civilizations",
+    "learning"
+  ],
+  "releaseDate": "2025-02-15",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "unlisted",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_006",
+  "captionsUrl": "https://example.com/captions/history_uncovered.vtt",
+  "views": 300,
+  "likeCount": 80,
+  "dislikeCount": 3,
+  "sharesCount": 10
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edceba"
+  },
+  "title": "Chasing Shadows",
+  "description": "A thriller about a detective's pursuit of a serial killer.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/chasing_shadows.mp4",
+  "s3KeyOriginal": "media/chasing_shadows_007.mp4",
+  "uploadId": "upload_007",
+  "duration": 8100,
+  "uploadedBy": "507f1f77bcf86cd799439017",
+  "uploaderType": "artist",
+  "genres": [
+    "Thriller",
+    "Crime"
+  ],
+  "tags": [
+    "detective",
+    "mystery",
+    "suspense"
+  ],
+  "releaseDate": "2024-07-10",
+  "language": "English",
+  "ageRating": "R",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": true,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_007",
+  "captionsUrl": "https://example.com/captions/chasing_shadows.vtt",
+  "views": 2000,
+  "likeCount": 500,
+  "dislikeCount": 30,
+  "sharesCount": 100
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcebb"
+  },
+  "title": "Rasta Road",
+  "description": "Reggae track with island vibes.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/rasta_road.mp3",
+  "s3KeyOriginal": "media/rasta_road_008.mp3",
+  "uploadId": "upload_008",
+  "duration": 180,
+  "uploadedBy": "507f1f77bcf86cd799439018",
+  "uploaderType": "artist",
+  "genres": [
+    "Reggae",
+    "World"
+  ],
+  "tags": [
+    "island",
+    "relax",
+    "vibes"
+  ],
+  "releaseDate": "2025-04-20",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_008",
+  "captionsUrl": null,
+  "views": 400,
+  "likeCount": 90,
+  "dislikeCount": 5,
+  "sharesCount": 12
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcebc"
+  },
+  "title": "Mind Matters",
+  "description": "A podcast on mental health and wellness.",
+  "type": "podcast",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/mind_matters.mp3",
+  "s3KeyOriginal": "media/mind_matters_009.mp3",
+  "uploadId": "upload_009",
+  "duration": 3000,
+  "uploadedBy": "507f1f77bcf86cd799439019",
+  "uploaderType": "admin",
+  "genres": [
+    "Health",
+    "Wellness"
+  ],
+  "tags": [
+    "mental health",
+    "self-care",
+    "psychology"
+  ],
+  "releaseDate": "2025-03-01",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_009",
+  "captionsUrl": "https://example.com/captions/mind_matters.vtt",
+  "views": 250,
+  "likeCount": 60,
+  "dislikeCount": 2,
+  "sharesCount": 8
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcebd"
+  },
+  "title": "La Révolution",
+  "description": "A historical drama about the French Revolution.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/la_revolution.mp4",
+  "s3KeyOriginal": "media/la_revolution_010.mp4",
+  "uploadId": "upload_010",
+  "duration": 9000,
+  "uploadedBy": "507f1f77bcf86cd799439020",
+  "uploaderType": "artist",
+  "genres": [
+    "Historical",
+    "Drama"
+  ],
+  "tags": [
+    "revolution",
+    "france",
+    "history"
+  ],
+  "releaseDate": "2023-12-01",
+  "language": "French",
+  "ageRating": "PG-13",
+  "isActive": true,
+  "visibility": "unlisted",
+  "isPublished": false,
+  "isPremium": true,
+  "transcodingStatus": "pending",
+  "mediaConvertJobId": "job_010",
+  "captionsUrl": null,
+  "views": 50,
+  "likeCount": 10,
+  "dislikeCount": 1,
+  "sharesCount": 3
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcebe"
+  },
+  "title": "Neon Nights",
+  "description": "Electronic dance track with vibrant energy.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/neon_nights.mp3",
+  "s3KeyOriginal": "media/neon_nights_011.mp3",
+  "uploadId": "upload_011",
+  "duration": 200,
+  "uploadedBy": "507f1f77bcf86cd799439021",
+  "uploaderType": "artist",
+  "genres": [
+    "Electronic",
+    "Dance"
+  ],
+  "tags": [
+    "nightlife",
+    "dance",
+    "energy"
+  ],
+  "releaseDate": "2025-05-15",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_011",
+  "captionsUrl": null,
+  "views": 700,
+  "likeCount": 140,
+  "dislikeCount": 7,
+  "sharesCount": 25
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcebf"
+  },
+  "title": "Science Frontiers",
+  "description": "Exploring cutting-edge scientific discoveries.",
+  "type": "podcast",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/science_frontiers.mp3",
+  "s3KeyOriginal": "media/science_frontiers_012.mp3",
+  "uploadId": "upload_012",
+  "duration": 3300,
+  "uploadedBy": "507f1f77bcf86cd799439022",
+  "uploaderType": "admin",
+  "genres": [
+    "Science",
+    "Education"
+  ],
+  "tags": [
+    "research",
+    "discovery",
+    "science"
+  ],
+  "releaseDate": "2025-04-10",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_012",
+  "captionsUrl": "https://example.com/captions/science_frontiers.vtt",
+  "views": 400,
+  "likeCount": 90,
+  "dislikeCount": 4,
+  "sharesCount": 15
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec0"
+  },
+  "title": "The Lost Kingdom",
+  "description": "A fantasy epic about a hidden realm.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/lost_kingdom.mp4",
+  "s3KeyOriginal": "media/lost_kingdom_013.mp4",
+  "uploadId": "upload_013",
+  "duration": 7800,
+  "uploadedBy": "507f1f77bcf86cd799439023",
+  "uploaderType": "artist",
+  "genres": [
+    "Fantasy",
+    "Adventure"
+  ],
+  "tags": [
+    "magic",
+    "kingdom",
+    "epic"
+  ],
+  "releaseDate": "2024-08-20",
+  "language": "English",
+  "ageRating": "PG",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": true,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_013",
+  "captionsUrl": "https://example.com/captions/lost_kingdom.vtt",
+  "views": 1800,
+  "likeCount": 400,
+  "dislikeCount": 25,
+  "sharesCount": 80
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec1"
+  },
+  "title": "Jazz Serenity",
+  "description": "Smooth jazz for relaxation.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/jazz_serenity.mp3",
+  "s3KeyOriginal": "media/jazz_serenity_014.mp3",
+  "uploadId": "upload_014",
+  "duration": 300,
+  "uploadedBy": "507f1f77bcf86cd799439024",
+  "uploaderType": "artist",
+  "genres": [
+    "Jazz",
+    "Relaxation"
+  ],
+  "tags": [
+    "smooth",
+    "jazz",
+    "calm"
+  ],
+  "releaseDate": "2024-10-01",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_014",
+  "captionsUrl": null,
+  "views": 500,
+  "likeCount": 100,
+  "dislikeCount": 5,
+  "sharesCount": 10
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec2"
+  },
+  "title": "Entrepreneur's Edge",
+  "description": "Tips and stories from successful entrepreneurs.",
+  "type": "podcast",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/entrepreneurs_edge.mp3",
+  "s3KeyOriginal": "media/entrepreneurs_edge_015.mp3",
+  "uploadId": "upload_015",
+  "duration": 2400,
+  "uploadedBy": "507f1f77bcf86cd799439025",
+  "uploaderType": "admin",
+  "genres": [
+    "Business",
+    "Motivation"
+  ],
+  "tags": [
+    "entrepreneurship",
+    "success",
+    "business"
+  ],
+  "releaseDate": "2025-05-01",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_015",
+  "captionsUrl": "https://example.com/captions/entrepreneurs_edge.vtt",
+  "views": 350,
+  "likeCount": 70,
+  "dislikeCount": 3,
+  "sharesCount": 12
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec3"
+  },
+  "title": "Samurai's Honor",
+  "description": "A historical drama about a samurai's journey.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/samurais_honor.mp4",
+  "s3KeyOriginal": "media/samurais_honor_016.mp4",
+  "uploadId": "upload_016",
+  "duration": 8400,
+  "uploadedBy": "507f1f77bcf86cd799439026",
+  "uploaderType": "artist",
+  "genres": [
+    "Historical",
+    "Action"
+  ],
+  "tags": [
+    "samurai",
+    "honor",
+    "japan"
+  ],
+  "releaseDate": "2024-06-15",
+  "language": "Japanese",
+  "ageRating": "R",
+  "isActive": true,
+  "visibility": "private",
+  "isPublished": false,
+  "isPremium": true,
+  "transcodingStatus": "processing",
+  "mediaConvertJobId": "job_016",
+  "captionsUrl": null,
+  "views": 200,
+  "likeCount": 40,
+  "dislikeCount": 5,
+  "sharesCount": 8
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec4"
+  },
+  "title": "Urban Pulse",
+  "description": "Hip-hop track with city energy.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/urban_pulse.mp3",
+  "s3KeyOriginal": "media/urban_pulse_017.mp3",
+  "uploadId": "upload_017",
+  "duration": 220,
+  "uploadedBy": "507f1f77bcf86cd799439027",
+  "uploaderType": "artist",
+  "genres": [
+    "Hip-Hop",
+    "Urban"
+  ],
+  "tags": [
+    "city",
+    "hip-hop",
+    "energy"
+  ],
+  "releaseDate": "2025-03-20",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_017",
+  "captionsUrl": null,
+  "views": 600,
+  "likeCount": 120,
+  "dislikeCount": 6,
+  "sharesCount": 20
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec5"
+  },
+  "title": "True Crime Chronicles",
+  "description": "Investigating infamous crime cases.",
+  "type": "podcast",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/true_crime.mp3",
+  "s3KeyOriginal": "media/true_crime_018.mp3",
+  "uploadId": "upload_018",
+  "duration": 3600,
+  "uploadedBy": "507f1f77bcf86cd799439028",
+  "uploaderType": "admin",
+  "genres": [
+    "True Crime",
+    "Mystery"
+  ],
+  "tags": [
+    "crime",
+    "investigation",
+    "mystery"
+  ],
+  "releaseDate": "2025-02-01",
+  "language": "English",
+  "ageRating": "R",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": true,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_018",
+  "captionsUrl": "https://example.com/captions/true_crime.vtt",
+  "views": 800,
+  "likeCount": 200,
+  "dislikeCount": 10,
+  "sharesCount": 30
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec6"
+  },
+  "title": "Echoes of Eternity",
+  "description": "A fantasy adventure about immortal beings.",
+  "type": "movie",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/echoes_eternity.mp4",
+  "s3KeyOriginal": "media/echoes_eternity_019.mp4",
+  "uploadId": "upload_019",
+  "duration": 7500,
+  "uploadedBy": "507f1f77bcf86cd799439029",
+  "uploaderType": "artist",
+  "genres": [
+    "Fantasy",
+    "Adventure"
+  ],
+  "tags": [
+    "immortality",
+    "magic",
+    "epic"
+  ],
+  "releaseDate": "2024-09-10",
+  "language": "English",
+  "ageRating": "PG-13",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": true,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_019",
+  "captionsUrl": "https://example.com/captions/echoes_eternity.vtt",
+  "views": 1600,
+  "likeCount": 350,
+  "dislikeCount": 20,
+  "sharesCount": 60
+},
+{
+  "_id": {
+    "$oid": "6870fd4cef75ca0909edcec7"
+  },
+  "title": "Classical Harmony",
+  "description": "Orchestral piece with timeless elegance.",
+  "type": "music",
+  "thumbnailUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&w=150&h=200&fit=crop",
+  "mediaUrl": "https://example.com/media/classical_harmony.mp3",
+  "s3KeyOriginal": "media/classical_harmony_020.mp3",
+  "uploadId": "upload_020",
+  "duration": 360,
+  "uploadedBy": "507f1f77bcf86cd799439030",
+  "uploaderType": "artist",
+  "genres": [
+    "Classical",
+    "Orchestral"
+  ],
+  "tags": [
+    "symphony",
+    "classical",
+    "elegant"
+  ],
+  "releaseDate": "2024-11-01",
+  "language": "English",
+  "ageRating": "G",
+  "isActive": true,
+  "visibility": "public",
+  "isPublished": true,
+  "isPremium": false,
+  "transcodingStatus": "completed",
+  "mediaConvertJobId": "job_020",
+  "captionsUrl": null,
+  "views": 300,
+  "likeCount": 80,
+  "dislikeCount": 4,
+  "sharesCount": 10
+}]
