@@ -1,7 +1,9 @@
 // === src/models/UserAuth.js ===
 
-const mongoose = require('mongoose');
-const argon2 = require('argon2');
+// const mongoose = require('mongoose');
+// const argon2 = require('argon2');
+import mongoose from 'mongoose';
+import argon2 from 'argon2';
 
 const UserAuthSchema = new mongoose.Schema(
   {
@@ -80,4 +82,5 @@ UserAuthSchema.methods.matchPassword = async function (enteredPassword) {
   }
 };
 
-module.exports = mongoose.model('UserAuth', UserAuthSchema);
+const UserAuth = mongoose.model('UserAuth', UserAuthSchema);
+export default UserAuth; // ✅ Use ESM export

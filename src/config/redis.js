@@ -1,5 +1,6 @@
 // src/config/redis.js
-const Redis = require('ioredis');
+// const Redis = require('ioredis');
+import Redis from 'ioredis';
 
 const redis = new Redis({
   host: process.env.REDIS_HOST || '127.0.0.1',

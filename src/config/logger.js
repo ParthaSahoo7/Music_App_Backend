@@ -1,6 +1,9 @@
-const { createLogger, format, transports } = require('winston');
-const DailyRotateFile = require('winston-daily-rotate-file');
-const path = require('path');
+// const { createLogger, format, transports } = require('winston');
+// const DailyRotateFile = require('winston-daily-rotate-file');
+// const path = require('path');
+import { createLogger, format, transports } from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';  
+import path from 'path';
 
 const logFormat = format.printf((info) => {
   const { timestamp, level, message, logId, userId, stack, ...meta } = info;
@@ -54,4 +57,4 @@ const stream = {
   write: (message) => logger.http(message.trim()),
 };
 
-module.exports = { logger, stream };
+export { logger, stream }; // ✅ Use ESM export

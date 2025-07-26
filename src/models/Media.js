@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const MediaSchema = new Schema({
@@ -34,7 +36,7 @@ const MediaSchema = new Schema({
   visibility: {
     type: String,
     enum: ['public', 'private', 'unlisted'],
-    default: 'public',
+    default: 'private',
   },
   isPublished: { type: Boolean, default: false },
   isPremium: { type: Boolean, default: false },
@@ -54,4 +56,5 @@ const MediaSchema = new Schema({
 // Index for efficient querying by uploadedBy and visibility
 MediaSchema.index({ uploadedBy: 1, visibility: 1 });
 
-module.exports = mongoose.model('Media', MediaSchema);
+const Media = mongoose.model('Media', MediaSchema);
+export default Media; // ✅ Use ESM export

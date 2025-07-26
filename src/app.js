@@ -1,21 +1,38 @@
 // src/app.js
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
-const mongoose = require('mongoose')
+// const express = require('express');
+// const helmet = require('helmet');
+// const cors = require('cors');
+// const morgan = require('morgan');
+// const rateLimit = require('express-rate-limit');
+// const mongoose = require('mongoose')
 
-const authRoutes = require('./modules/auth/authRoutes');
+// const authRoutes = require('./modules/auth/authRoutes');
 
-const mediaRoutes = require('./modules/media/mediaRoutes');
-const mediaLibraryRoutes = require('./modules/mediaLibrary/mediaLibraryRoutes');
-const artistRoutes = require('./modules/artist/artistRoutes');
+// const mediaRoutes = require('./modules/media/mediaRoutes');
+// const mediaLibraryRoutes = require('./modules/mediaLibrary/mediaLibraryRoutes');
+// const artistRoutes = require('./modules/artist/artistRoutes');
 
-const { logger, stream } = require('./config/logger');
-const {morganMiddleware} = require('./middlewares/morgan.middleware')
-const assignLogId = require('./middlewares/assignLogId.middleware');
-const responseLogger = require('./middlewares/responseLogger.middleware');
+// const { logger, stream } = require('./config/logger');
+// const {morganMiddleware} = require('./middlewares/morgan.middleware')
+// const assignLogId = require('./middlewares/assignLogId.middleware');
+// const responseLogger = require('./middlewares/responseLogger.middleware');
+
+import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import morgan from 'morgan';
+import rateLimit from 'express-rate-limit';
+import mongoose from 'mongoose';
+import authRoutes from './modules/auth/authRoutes.js';
+import mediaRoutes from './modules/media/mediaRoutes.js';
+import mediaLibraryRoutes from './modules/mediaLibrary/mediaLibraryRoutes.js';
+import artistRoutes from './modules/artist/artistRoutes.js';
+import { logger, stream as morganStream } from './config/logger.js';
+import morganMiddleware from './middlewares/morgan.middleware.js';
+import assignLogId from './middlewares/assignLogId.middleware.js';
+import responseLogger from './middlewares/responseLogger.middleware.js';
+
+console.log('🚀 Loading app.js');
 
 const app = express();
 
@@ -26,7 +43,7 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 mins
-  max: 10000, // limit each IP
+  max: 100, // limit each IP
   message: 'Too many requests, please try again later.',
 });
 app.use(limiter);
@@ -88,4 +105,4 @@ app.use((req, res, next) => {
 });
 
 
-module.exports = app;
+export default app;

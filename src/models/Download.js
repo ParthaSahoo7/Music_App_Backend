@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const DownloadSchema = new Schema({
@@ -45,4 +47,5 @@ const DownloadSchema = new Schema({
 // Unique index to prevent duplicate downloads for the same user, media, and variant
 DownloadSchema.index({ userId: 1, mediaId: 1, mediaVariantId: 1 }, { unique: true });
 
-module.exports = mongoose.model('Download', DownloadSchema);
+const Download = mongoose.model('Download', DownloadSchema);
+export default Download; // ✅ Use ESM export

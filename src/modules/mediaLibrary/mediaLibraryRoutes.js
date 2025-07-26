@@ -4,10 +4,14 @@
 // Favourites
 // Watch Later
 
-const express = require('express');
-const { check } = require('express-validator');
-const authorizeUser = require('../../middlewares/authorizeUser');
-const mediaLibraryController = require('./mediaLibraryControllers');
+// const express = require('express');
+// const { check } = require('express-validator');
+// const authorizeUser = require('../../middlewares/authorizeUser');
+// const mediaLibraryController = require('./mediaLibraryControllers');
+import express from 'express';
+import { check } from 'express-validator';
+import authorizeUser from '../../middlewares/authorizeUser.js';
+import mediaLibraryController from './mediaLibraryControllers.js';
 
 const router = express.Router();
 
@@ -159,4 +163,4 @@ router.delete(
   mediaLibraryController.deleteDownload
 );
 
-module.exports = router;
+export default router;

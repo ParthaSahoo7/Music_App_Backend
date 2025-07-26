@@ -1,4 +1,7 @@
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const SessionSchema = new mongoose.Schema({
     userId: {
@@ -28,4 +31,5 @@ const SessionSchema = new mongoose.Schema({
 
 },{timestamps:true});
 
-module.exports = mongoose.model('Session',SessionSchema);
+const Session = mongoose.model('Session', SessionSchema);
+export default Session; // ✅ Use ESM export

@@ -1,7 +1,12 @@
-const { validationResult } = require('express-validator');
-const artistService = require('./artistServices');
-const { successResponse, errorResponse } = require('../../utils/responseTemplate');
-const { createRequestLogger } = require('../../utils/requestLogger');
+// const { validationResult } = require('express-validator');
+// const artistService = require('./artistServices');
+// const { successResponse, errorResponse } = require('../../utils/responseTemplate');
+// const { createRequestLogger } = require('../../utils/requestLogger');
+import { validationResult } from 'express-validator';
+import artistService from './artistServices.js';
+import { successResponse, errorResponse } from '../../utils/responseTemplate.js';  
+import { createRequestLogger } from '../../utils/requestLogger.js';
+
 
 const getAllArtists = async (req, res) => {
   const log = createRequestLogger(req);
@@ -286,8 +291,7 @@ const unfollowArtist = async (req, res) => {
     );
   }
 };
-
-module.exports = {
+export default {
   getAllArtists,
   createArtist,
   getArtistById,

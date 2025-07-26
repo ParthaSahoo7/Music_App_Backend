@@ -1,5 +1,8 @@
-const mongoose = require('mongoose');
-const { logger } = require('./logger');
+// const mongoose = require('mongoose');
+// const { logger } = require('./logger');
+
+import mongoose from 'mongoose';
+import { logger } from './logger.js';
 
 const connectDB = async () => {
   const MONGO_URI = process.env.MONGODB_URI;
@@ -24,4 +27,4 @@ const connectDB = async () => {
   });
 };
 
-module.exports = connectDB;
+export default connectDB;

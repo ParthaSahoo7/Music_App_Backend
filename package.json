@@ -1,9 +1,10 @@
 {
   "name": "express-boilerplate",
   "version": "1.0.0",
+  "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon src/server.js"
   },
   "keywords": [],
@@ -12,15 +13,14 @@
   "description": "",
   "dependencies": {
     "@aws-sdk/client-mediaconvert": "^3.844.0",
-    "@aws-sdk/client-s3": "^3.844.0",
-    "@aws-sdk/s3-request-presigner": "^3.844.0",
+    "@aws-sdk/client-s3": "^3.846.0",
+    "@aws-sdk/s3-request-presigner": "^3.846.0",
     "apple-signin-auth": "^2.0.0",
-    "argon2": "^0.43.0",
-    "aws-sdk": "^2.1692.0",
+    "argon2": "^0.43.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
+    "express": "^4.17.1",
     "express-rate-limit": "^7.5.1",
     "express-validator": "^7.2.1",
     "google-auth-library": "^10.1.0",
@@ -34,5 +34,9 @@
     "uuid": "^11.1.0",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }

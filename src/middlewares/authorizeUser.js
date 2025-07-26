@@ -1,4 +1,7 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Replace this with your actual secret
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
@@ -21,4 +24,4 @@ function authorizeMiddleware(req, res, next) {
   }
 }
 
-module.exports = authorizeMiddleware;
+export default authorizeMiddleware;

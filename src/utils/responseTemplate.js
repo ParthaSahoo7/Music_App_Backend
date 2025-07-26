@@ -19,4 +19,4 @@ const errorResponse = (error = {}, code = 500) => {
   };
 };
 
-module.exports = { successResponse, errorResponse };
+export { successResponse, errorResponse };

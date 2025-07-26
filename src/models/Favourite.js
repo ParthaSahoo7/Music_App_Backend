@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const FavouriteSchema = new Schema({
@@ -19,4 +20,5 @@ const FavouriteSchema = new Schema({
 // Unique index to prevent duplicate favorites
 FavouriteSchema.index({ userId: 1, mediaId: 1 }, { unique: true });
 
-module.exports = mongoose.model('Favourite', FavouriteSchema);
+const Favourite = mongoose.model('Favourite', FavouriteSchema);
+export default Favourite; // ✅ Use ESM export

@@ -1,7 +1,12 @@
-const { validationResult } = require('express-validator');
-const mediaLibraryService = require('./mediaLibraryServices');
-const { successResponse, errorResponse } = require('../../utils/responseTemplate');
-const { createRequestLogger } = require('../../utils/requestLogger');
+// const { validationResult } = require('express-validator');
+// const mediaLibraryService = require('./mediaLibraryServices');
+// const { successResponse, errorResponse } = require('../../utils/responseTemplate');
+// const { createRequestLogger } = require('../../utils/requestLogger');
+
+import { validationResult } from 'express-validator';
+import mediaLibraryService from './mediaLibraryServices.js';
+import { successResponse, errorResponse } from '../../utils/responseTemplate.js';
+import { createRequestLogger } from '../../utils/requestLogger.js';
 
 const createPlaylist = async (req, res) => {
   const log = createRequestLogger(req);
@@ -88,7 +93,7 @@ const updatePlaylist = async (req, res) => {
       }, 400));
     }
 
-    const userId = req.user._id;
+    const userId = req.user.userId;
     const playlist = await mediaLibraryService.updatePlaylist(userId, req.params.id, req.body);
 
     return res.status(200).json(successResponse(playlist, 'Playlist updated successfully'));
@@ -441,7 +446,7 @@ const deleteDownload = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   createPlaylist,
   getUserPlaylists,
   getPlaylistById,

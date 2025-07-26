@@ -1,7 +1,11 @@
-const { validationResult } = require('express-validator');
-const mediaService = require('./mediaServices');
-const { successResponse, errorResponse } = require('../../utils/responseTemplate');
-const { createRequestLogger } = require('../../utils/requestLogger');
+// const { validationResult } = require('express-validator');
+// const mediaService = require('./mediaServices');
+// const { successResponse, errorResponse } = require('../../utils/responseTemplate');
+// const { createRequestLogger } = require('../../utils/requestLogger');
+import { validationResult } from 'express-validator';
+import mediaService from './mediaServices.js';
+import { successResponse, errorResponse } from '../../utils/responseTemplate.js';
+import { createRequestLogger } from '../../utils/requestLogger.js';
 
 const initiateUploadController = async (req, res) => {
   const log = createRequestLogger(req);
@@ -78,20 +82,17 @@ const completeUploadController = async (req, res) => {
       }, 400));
     }
 
-    const { uploadId, key, duration, title, description, type, visibility, genres, tags, language, ageRating, parts } = req.body;
+    const { uploadId, key, title, description, type, genres, tags, ageRating, parts } = req.body;
     const userId = req.user._id;
 
     const media = await mediaService.completeUpload(userId, {
       uploadId,
       key,
-      duration,
       title,
       description,
       type,
-      visibility,
       genres: genres ? genres.split(',') : [],
       tags: tags ? tags.split(',') : [],
-      language,
       ageRating,
       parts,
     });
@@ -243,7 +244,35 @@ const deleteMediaController = async (req, res) => {
   }
 };
 
-module.exports = {
+const uploadThumbnailController = async (req, res) => {
+  const log = createRequestLogger(req);
+  log.info('Uploading thumbnail for media');
+
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      log.warn('Validation failed during thumbnail upload');
+      return res.status(400).json(errorResponse({
+        message: 'Invalid input for thumbnail upload',
+        errors: errors.array(),
+      }, 400));
+    }
+
+    const { mediaId, thumbnailUrl } = req.body;
+    const userId = req.user._id;
+
+    const result = await mediaService.uploadThumbnail(userId, mediaId, thumbnailUrl);
+
+    return res.status(200).json(successResponse(result, 'Thumbnail uploaded successfully'));
+  } catch (error) {
+    log.error(`Error uploading thumbnail: ${error.message}`);
+    return res.status(400).json(errorResponse({
+      message: error.message || 'Failed to upload thumbnail.',
+    }, 400));
+  }
+};
+
+export default{
   initiateUploadController,
   getPresignedUrlsController,
   completeUploadController,
@@ -253,4 +282,5 @@ module.exports = {
   getMediaByIdController,
   updateMediaController,
   deleteMediaController,
+  uploadThumbnailController
 };

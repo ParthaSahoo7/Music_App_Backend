@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const UserFollowArtistSchema = new Schema({
   userId: {
@@ -24,4 +26,5 @@ const UserFollowArtistSchema = new Schema({
 }, { timestamps: true });   
 // Unique index to prevent duplicate follows
 UserFollowArtistSchema.index({ userId: 1, artistId: 1 }, { unique: true });
-module.exports = mongoose.model('UserFollowArtist', UserFollowArtistSchema);
+const UserFollowArtist = mongoose.model('UserFollowArtist', UserFollowArtistSchema);
+export default UserFollowArtist; // ✅ Use ESM export

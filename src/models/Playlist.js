@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 // playlist can be created by admin user and artist as well
@@ -54,4 +56,5 @@ const PlaylistSchema = new Schema({
 // Index for efficient querying by user and visibility
 PlaylistSchema.index({ userId: 1, visibility: 1 });
 
-module.exports = mongoose.model('Playlist', PlaylistSchema);
+const Playlist = mongoose.model('Playlist', PlaylistSchema);
+export default Playlist; // ✅ Use ESM export

@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 const ArtistSchema = new Schema({
   name: {
@@ -34,4 +36,6 @@ const ArtistSchema = new Schema({
 }, { timestamps: true });   
 
 ArtistSchema.index({ name: 1 }, { unique: true });  
-module.exports = mongoose.model('Artist', ArtistSchema);
+
+const Artist = mongoose.model('Artist', ArtistSchema);
+export default Artist; // ✅ Use ESM export

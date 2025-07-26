@@ -1,21 +1,35 @@
-const { validationResult } = require("express-validator");
-const jwt = require("jsonwebtoken");
-const { OAuth2Client } = require("google-auth-library");
-const appleSignin = require("apple-signin-auth");
-const UserAuth = require("../../models/UserAuth");
-const EmailVerificationToken = require("../../models/EmailVerificationToken");
-const PasswordResetToken = require('../../models/PasswordResetToken')
-const authService = require("./authServices");
-const {
-  successResponse,
-  errorResponse,
-} = require("../../utils/responseTemplate");
-const {
-  sendVerificationEmail,
-  sendPasswordResetEmail,
-} = require("../../utils/emailServices");
-const { sendVerificationSMS } = require("../../utils/smsServices");
-const { createRequestLogger } = require("../../utils/requestLogger");
+// const { validationResult } = require("express-validator");
+// const jwt = require("jsonwebtoken");
+// const { OAuth2Client } = require("google-auth-library");
+// const appleSignin = require("apple-signin-auth");
+// const UserAuth = require("../../models/UserAuth");
+// const EmailVerificationToken = require("../../models/EmailVerificationToken");
+// const PasswordResetToken = require('../../models/PasswordResetToken')
+// const authService = require("./authServices");
+// const {
+//   successResponse,
+//   errorResponse,
+// } = require("../../utils/responseTemplate");
+// const {
+//   sendVerificationEmail,
+//   sendPasswordResetEmail,
+// } = require("../../utils/emailServices");
+// const { sendVerificationSMS } = require("../../utils/smsServices");
+// const { createRequestLogger } = require("../../utils/requestLogger");
+import { validationResult } from 'express-validator';
+import jwt from 'jsonwebtoken';
+import { OAuth2Client } from 'google-auth-library';
+import appleSignin from 'apple-signin-auth';
+import UserAuth from '../../models/UserAuth.js';
+import EmailVerificationToken from '../../models/EmailVerificationToken.js';
+import PasswordResetToken from '../../models/PasswordResetToken.js';
+import authService from './authServices.js';
+import { successResponse, errorResponse } from '../../utils/responseTemplate.js';
+import { sendVerificationEmail, sendPasswordResetEmail } from '../../utils/emailServices.js';
+import { sendVerificationSMS } from '../../utils/smsServices.js';
+import { createRequestLogger } from '../../utils/requestLogger.js';
+
+
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -214,7 +228,7 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
+      expiresIn: "7d",
     });
 
     return res.status(200).json(
@@ -820,7 +834,7 @@ const appleAuth = async (req, res) => {
   }
 };
 
-module.exports = {
+export default  {
   register,
   login,
   logout,

@@ -3,10 +3,14 @@
 // create artist
 // delete artist
 
-const express = require('express');
-const { check } = require('express-validator');
-const authorizeUser = require('../../middlewares/authorizeUser');
-const artistController = require('./artistController');
+// const express = require('express');
+// const { check } = require('express-validator');
+// const authorizeUser = require('../../middlewares/authorizeUser');
+// const artistController = require('./artistController');
+import express from 'express';
+import { check } from 'express-validator';
+import authorizeUser from '../../middlewares/authorizeUser.js';
+import artistController from './artistController.js';
 
 const router = express.Router();
 
@@ -84,4 +88,4 @@ router.use(
   artistController.unfollowArtist
 )
 
-module.exports = router;
+export default router;

@@ -1,4 +1,5 @@
-const transporter = require('./emailTransporter');
+// const transporter = require('./emailTransporter');
+import transporter from './emailTransporter.js';
 
 const sendVerificationEmail = async (toEmail, token) => {
   const mailOptions = {
@@ -43,5 +44,4 @@ const sendPasswordResetEmail = async (toEmail, token) => {
 };
 
 
-
-module.exports = { sendVerificationEmail, sendPasswordResetEmail };
+export { sendVerificationEmail, sendPasswordResetEmail }; // ✅ Use ESM export

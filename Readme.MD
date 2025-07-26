@@ -75,3 +75,45 @@ s3://your-bucket-name/
 ├── users/                                            # Regular users
 │   └── {user_id}/
 │       └── profile.jpg                               # User profile image
+
+
+
+
+
+Subscription Payment Store 
+
+Subscription
+    Free
+    Premium
+    Premium+
+
+    Modify Subscription
+    Get All Subscription
+    Remove Subscription
+    Create Subscription
+
+Store
+    Product
+        Add product
+        Get all product
+        Get product by Id
+        Modify product
+        Delete product
+
+    Add to cart
+    Add address
+    Payment
+    Order
+    Tracking
+
+Payment
+    Store Payment
+        Payment Type : Store
+            userId
+            OrderId
+            Price
+    Subscription Payment
+        Payment Type : Subscription
+            userId
+            SubscriptionId
+            Price

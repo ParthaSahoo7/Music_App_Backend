@@ -1,5 +1,25 @@
-const { v4: uuidv4 } = require('uuid');
-const {
+// const { v4: uuidv4 } = require('uuid');
+// const {
+//   S3Client,
+//   CreateMultipartUploadCommand,
+//   UploadPartCommand,
+//   CompleteMultipartUploadCommand,
+//   GetObjectCommand,
+//   DeleteObjectCommand,
+//   ListMultipartUploadsCommand,
+//   AbortMultipartUploadCommand,
+// } = require('@aws-sdk/client-s3');
+// const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+// const {
+//   MediaConvertClient,
+//   CreateJobCommand,
+// } = require('@aws-sdk/client-mediaconvert');
+// const Media = require('../../models/Media');
+// const MediaVariant = require('../../models/MediaVariant');
+// const UserAuth = require('../../models/UserAuth');
+// const { createRequestLogger } = require('../../utils/requestLogger');
+import { v4 as uuidv4 } from 'uuid';
+import {
   S3Client,
   CreateMultipartUploadCommand,
   UploadPartCommand,
@@ -8,16 +28,13 @@ const {
   DeleteObjectCommand,
   ListMultipartUploadsCommand,
   AbortMultipartUploadCommand,
-} = require('@aws-sdk/client-s3');
-const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
-const {
-  MediaConvertClient,
-  CreateJobCommand,
-} = require('@aws-sdk/client-mediaconvert');
-const Media = require('../../models/Media');
-const MediaVariant = require('../../models/MediaVariant');
-const UserAuth = require('../../models/UserAuth');
-const { createRequestLogger } = require('../../utils/requestLogger');
+} from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import { MediaConvertClient, CreateJobCommand } from '@aws-sdk/client-mediaconvert';
+import Media from '../../models/Media.js';
+import MediaVariant from '../../models/MediaVariant.js';
+import UserAuth from '../../models/UserAuth.js';
+import { createRequestLogger } from '../../utils/requestLogger.js';
 
 // Initialize S3 client (v3)
 const s3 = new S3Client({
@@ -72,7 +89,7 @@ const getPresignedUrls = async (userId, uploadId, key, partNumbers) => {
   }
 
   const urls = [];
-  for (const partNumber of partNumbers) {
+  for (let partNumber = 1; partNumber <= partNumbers; partNumber++) {
     const command = new UploadPartCommand({
       Bucket: process.env.AWS_S3_BUCKET,
       Key: key,
@@ -88,7 +105,7 @@ const getPresignedUrls = async (userId, uploadId, key, partNumbers) => {
   return urls;
 };
 
-const completeUpload = async (userId, { uploadId, key, duration, title, description, type, visibility, genres, tags, language, ageRating, parts }) => {
+const completeUpload = async (userId, { uploadId, key, title, description, type, genres, tags, ageRating, parts }) => {
   const log = createRequestLogger({ userId });
   log.info(`Completing multipart upload for key: ${key}`);
 
@@ -128,12 +145,9 @@ const completeUpload = async (userId, { uploadId, key, duration, title, descript
     title,
     description,
     type,
-    visibility: visibility || 'public',
     genres: genres || [],
     tags: tags || [],
-    language,
     ageRating,
-    duration,
     transcodingStatus: 'processing',
   });
 
@@ -568,7 +582,23 @@ const deleteMedia = async (userId, mediaId) => {
   return { message: 'Media deleted successfully' };
 };
 
-module.exports = {
+
+const uploadThumbnail = async (userId, mediaId, thumbnailUrl) => {
+  const log = createRequestLogger({ userId });
+  log.info(`Uploading thumbnail for mediaId: ${mediaId}`);
+
+  const media = await Media.findById(mediaId);
+  if (!media || media.uploadedBy.toString() !== userId.toString()) {
+    throw new Error('Media not found or unauthorized');
+  }
+
+  media.thumbnailUrl = thumbnailUrl;
+  await media.save();
+
+  return media;
+};
+
+export default {
   initiateUpload,
   getPresignedUrls,
   completeUpload,
@@ -579,4 +609,6 @@ module.exports = {
   getMediaById,
   updateMedia,
   deleteMedia,
+  uploadThumbnail,
+  createMediaConvertJob,
 };

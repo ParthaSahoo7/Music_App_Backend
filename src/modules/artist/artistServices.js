@@ -1,9 +1,16 @@
-const mongoose = require('mongoose');
-const Artist = require('../../models/Artist');
-const UserAuth = require('../../models/UserAuth');
-const Media = require('../../models/Media');
-const UserFollowArtist = require('../../models/UserFollowArtist');
-const { createRequestLogger } = require('../../utils/requestLogger');
+// const mongoose = require('mongoose');
+// const Artist = require('../../models/Artist');
+// const UserAuth = require('../../models/UserAuth');
+// const Media = require('../../models/Media');
+// const UserFollowArtist = require('../../models/UserFollowArtist');
+// const { createRequestLogger } = require('../../utils/requestLogger');
+import mongoose from 'mongoose';
+import Artist from '../../models/Artist.js';
+import UserAuth from '../../models/UserAuth.js';
+import Media from '../../models/Media.js';
+import UserFollowArtist from '../../models/UserFollowArtist.js';
+import { createRequestLogger } from '../../utils/requestLogger.js';
+
 
 const getAllArtists = async (userId) => {
   const log = createRequestLogger({ userId });
@@ -322,7 +329,7 @@ const unfollowArtist = async (userId, artistId) => {
   }
 };
 
-module.exports = {
+export default {
   getAllArtists,
   createArtist,
   getArtistById,

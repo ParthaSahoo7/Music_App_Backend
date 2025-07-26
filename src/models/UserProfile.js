@@ -1,4 +1,7 @@
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
 const UserProfileSchema = new mongoose.Schema({
     userId:{
@@ -54,4 +57,4 @@ const UserProfileSchema = new mongoose.Schema({
 
 const UserProfile = mongoose.model("UserProfile", UserProfileSchema);
 
-module.exports = UserProfile
+export default UserProfile; // ✅ Use ESM export

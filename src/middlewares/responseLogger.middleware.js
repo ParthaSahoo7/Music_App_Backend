@@ -1,5 +1,6 @@
 // middlewares/responseLogger.js
-const { logger } = require('../config/logger');
+// const { logger } = require('../config/logger');
+import { logger } from '../config/logger.js';
 
 const responseLogger = (req, res, next) => {
   const startHrTime = process.hrtime();
@@ -39,4 +40,4 @@ const sanitizeBody = (body) => {
   return rest;
 };
 
-module.exports = responseLogger;
+export default responseLogger;

@@ -1,4 +1,7 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+// const { Schema } = mongoose;
+const { Schema } = mongoose;
 
 const PasswordResetTokenSchema = new mongoose.Schema({
     userId: {
@@ -21,4 +24,4 @@ const PasswordResetTokenSchema = new mongoose.Schema({
 
 const PasswordResetToken = mongoose.model('PasswordResetToken', PasswordResetTokenSchema);
 
-module.exports = PasswordResetToken;
+export default PasswordResetToken; // ✅ Use ESM export

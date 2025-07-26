@@ -1,4 +1,7 @@
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
+import mongoose from 'mongoose';
+// const { Schema } = mongoose;
+const { Schema } = mongoose;
 
 const OTPVerificationSchema = new mongoose.Schema({
     userId: {
@@ -25,4 +28,5 @@ const OTPVerificationSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-module.exports = mongoose.model('OTPVerification', OTPVerificationSchema);
+const OTPVerification = mongoose.model('OTPVerification', OTPVerificationSchema);
+export default OTPVerification; // ✅ Use ESM export

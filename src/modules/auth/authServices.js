@@ -1,10 +1,18 @@
-const UserAuth = require('../../models/UserAuth');
-const UserProfile = require('../../models/UserProfile');
-const PasswordVerificationToken = require('../../models/PasswordResetToken')
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { sendVerificationSMS } = require('../../utils/smsServices');
-const { sendVerificationEmail, sendPasswordResetEmail } = require('../../utils/emailServices');
+// const UserAuth = require('../../models/UserAuth');
+// const UserProfile = require('../../models/UserProfile');
+// const PasswordVerificationToken = require('../../models/PasswordResetToken')
+// const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcryptjs');
+// const { sendVerificationSMS } = require('../../utils/smsServices');
+// const { sendVerificationEmail, sendPasswordResetEmail } = require('../../utils/emailServices');
+
+import UserAuth from '../../models/UserAuth.js';
+import UserProfile from '../../models/UserProfile.js';
+import PasswordVerificationToken from '../../models/PasswordResetToken.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { sendVerificationSMS } from '../../utils/smsServices.js';
+import { sendVerificationEmail, sendPasswordResetEmail } from '../../utils/emailServices.js';  
 
 const generate6DigitToken = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -173,7 +181,8 @@ const appleAuth = async (appleProfile) => {
     return user;
 };
 
-module.exports = {
+
+export default {
     registerUser,
     loginUser,
     forgotPassword,
@@ -183,5 +192,5 @@ module.exports = {
     sendPhoneOTP,
     verifyPhoneOTP,
     googleAuth,
-    appleAuth
+    appleAuth   
 };

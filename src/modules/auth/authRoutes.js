@@ -1,7 +1,12 @@
-const express = require('express');
-const { check } = require('express-validator');
-const authController = require('./authControllers');
-const authorizeUser = require('../../middlewares/authorizeUser')
+// const express = require('express');
+// const { check } = require('express-validator');
+// const authController = require('./authControllers');
+// const authorizeUser = require('../../middlewares/authorizeUser')
+import express from 'express';
+import { check } from 'express-validator';
+import authController from './authControllers.js';
+import authorizeUser from '../../middlewares/authorizeUser.js';  
+
 
 const router = express.Router();
 
@@ -96,4 +101,4 @@ router.post(
 
 
 
-module.exports = router;
+export default router;

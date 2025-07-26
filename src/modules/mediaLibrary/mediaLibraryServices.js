@@ -1,14 +1,16 @@
-const mongoose = require('mongoose');
-const AWS = require('aws-sdk');
-const Playlist = require('../../models/Playlist');
-const WatchingHistory = require('../../models/WatchingHistory');
-const Favourite = require('../../models/Favourite');
-const WatchLater = require('../../models/WatchLater');
-const Download = require('../../models/Download');
-const Media = require('../../models/Media');
-const MediaVariant = require('../../models/MediaVariant');
-const { createRequestLogger } = require('../../utils/requestLogger');
-const UserProfile = require('../../models/UserProfile');
+import mongoose from 'mongoose';
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
+import Playlist from '../../models/Playlist.js';
+import WatchingHistory from '../../models/WatchingHistory.js';
+import Favourite from '../../models/Favourite.js';
+import WatchLater from '../../models/WatchLater.js';
+import Download from '../../models/Download.js';
+import Media from '../../models/Media.js';
+import MediaVariant from '../../models/MediaVariant.js';
+import { createRequestLogger } from '../../utils/requestLogger.js';
+import UserProfile from '../../models/UserProfile.js';
+import UserAuth from '../../models/UserAuth.js';
 
 const createPlaylist = async (userId, { name, description, mediaItems, thumbnailUrl }) => {
   const log = createRequestLogger({ userId });
@@ -21,16 +23,17 @@ const createPlaylist = async (userId, { name, description, mediaItems, thumbnail
     }
   }
 
-  const user = await UserProfile.find({userId});
+  const user = await UserAuth.findById(userId);
   if (!user) {
     throw new Error('User not found');
   }
-  console.log("user",user[0].role);
+  console.log("user", user.role);
 
   const playlist = new Playlist({
     name,
     createdBy: userId,
-    creatorType: user[0].role, 
+    creatorType: user.role,
+    mediaItems: mediaItems || [],
     description,
     thumbnailUrl: thumbnailUrl || '',
     mediaItems: mediaItems || [],
@@ -42,22 +45,20 @@ const createPlaylist = async (userId, { name, description, mediaItems, thumbnail
 };
 
 const getUserPlaylists = async (userId, queryParams, log) => {
-  //const log = createRequestLogger({ userId });
   log.info('Fetching user playlists');
 
   const query = {
     isActive: true,
     $or: [
-      { createdBy: userId }, 
-      { 
-        creatorType: { $in: ['admin', 'artist'] }, 
-        visibility: 'public' 
+      { createdBy: userId },
+      {
+        creatorType: { $in: ['admin', 'artist'] },
+        visibility: 'public'
       }
     ]
   };
 
   if (queryParams?.visibility) {
-    // Optionally filter final result by visibility
     query.visibility = queryParams.visibility;
   }
 
@@ -69,9 +70,7 @@ const getUserPlaylists = async (userId, queryParams, log) => {
   return playlists;
 };
 
-
 const getPlaylistById = async (userId, playlistId, log) => {
-  //const log = createRequestLogger({ userId });
   log.info(`Fetching playlist: ${playlistId}`);
 
   const playlist = await Playlist.findById(playlistId)
@@ -95,15 +94,19 @@ const getPlaylistById = async (userId, playlistId, log) => {
   return playlist;
 };
 
-
 const updatePlaylist = async (userId, playlistId, updateData) => {
   const log = createRequestLogger({ userId });
   log.info(`Updating playlist: ${playlistId}`);
 
   const playlist = await Playlist.findById(playlistId);
-  if (!playlist || playlist.userId.toString() !== userId.toString()) {
+  if (
+    !playlist ||
+    playlist.creatorType !== 'user' ||
+    playlist.createdBy.toString() !== userId.toString()
+  ) {
     throw new Error('Playlist not found or unauthorized');
   }
+
 
   Object.assign(playlist, updateData);
   await playlist.save();
@@ -137,7 +140,6 @@ const addMediaToPlaylist = async (userId, playlistId, mediaId) => {
   return (await playlist.populate('mediaItems', 'title type thumbnailUrl')).populate('createdBy', 'username');
 };
 
-
 const removeMediaFromPlaylist = async (userId, playlistId, mediaId) => {
   const log = createRequestLogger({ userId });
   log.info(`Removing media ${mediaId} from playlist ${playlistId}`);
@@ -166,7 +168,6 @@ const removeMediaFromPlaylist = async (userId, playlistId, mediaId) => {
   return playlist.populate('mediaItems', 'title type thumbnailUrl');
 };
 
-
 const deletePlaylist = async (userId, playlistId) => {
   const log = createRequestLogger({ userId });
   log.info(`Deleting playlist: ${playlistId}`);
@@ -185,7 +186,6 @@ const deletePlaylist = async (userId, playlistId) => {
   await playlist.save();
   log.info(`Playlist marked inactive (deleted): ${playlistId}`);
 };
-
 
 const updateWatchingHistory = async (userId, mediaId, { lastWatchedPosition, isCompleted }) => {
   const log = createRequestLogger({ userId });
@@ -255,7 +255,7 @@ const removeFromFavourites = async (userId, mediaId) => {
 };
 
 const getFavourites = async (userId) => {
-  const log = createRequestLogger(req);
+  const log = createRequestLogger({ userId });
   log.info('Fetching favourites');
 
   const favourites = await Favourite.find({ userId })
@@ -320,20 +320,21 @@ const initiateDownload = async (userId, { mediaId, mediaVariantId, resolution, f
     throw new Error('Invalid media variant');
   }
 
-  const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  const s3Client = new S3Client({
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
     region: process.env.AWS_REGION,
   });
 
   const s3Key = variant.streamUrl.replace(`${process.env.AWS_S3_BUCKET_URL}/`, '');
-  const params = {
+  const command = new GetObjectCommand({
     Bucket: process.env.AWS_S3_BUCKET,
     Key: s3Key,
-    Expires: 7 * 24 * 60 * 60, // 7 days
-  };
+  });
 
-  const downloadUrl = await s3.getSignedUrlPromise('getObject', params);
+  const downloadUrl = await getSignedUrl(s3Client, command, { expiresIn: 7 * 24 * 60 * 60 });
 
   const download = new Download({
     userId,
@@ -342,7 +343,7 @@ const initiateDownload = async (userId, { mediaId, mediaVariantId, resolution, f
     resolution,
     downloadUrl,
     fileSize,
-    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+    expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   });
 
   await download.save();
@@ -376,7 +377,7 @@ const deleteDownload = async (userId, downloadId) => {
   log.info(`Download deleted: ${downloadId}`);
 };
 
-module.exports = {
+export default {
   createPlaylist,
   getUserPlaylists,
   getPlaylistById,

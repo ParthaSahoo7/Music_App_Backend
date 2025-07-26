@@ -1,4 +1,5 @@
-const { logger } = require('../config/logger');
+// const { logger } = require('../config/logger');
+import { logger } from '../config/logger.js';
 
 const createRequestLogger = (req) => {
   const logId = req.logId || '-';
@@ -12,4 +13,4 @@ const createRequestLogger = (req) => {
   };
 };
 
-module.exports = { createRequestLogger };
+export { createRequestLogger }; // ✅ Use ESM export

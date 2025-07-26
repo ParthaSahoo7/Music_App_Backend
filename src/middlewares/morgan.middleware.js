@@ -1,6 +1,8 @@
 // === src/middlewares/morgan.middleware.js ===
-const morgan = require('morgan');
-const { stream } = require('../config/logger');
+// const morgan = require('morgan');
+// const { stream } = require('../config/logger');
+import morgan from 'morgan';
+import { stream } from '../config/logger.js';
 
 // Custom tokens
 morgan.token('log-id', (req) => req.logId || '-');
@@ -31,4 +33,5 @@ const format =
 
 const morganMiddleware = morgan(format, { stream, skip });
 
-module.exports = { morganMiddleware };
+
+export default morganMiddleware; // ✅ Use ESM export

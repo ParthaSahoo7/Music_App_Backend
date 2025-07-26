@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const WatchingHistorySchema = new Schema({
@@ -32,4 +34,5 @@ const WatchingHistorySchema = new Schema({
 // Unique index to prevent duplicate entries for the same user and media
 WatchingHistorySchema.index({ userId: 1, mediaId: 1 }, { unique: true });
 
-module.exports = mongoose.model('WatchingHistory', WatchingHistorySchema);
+const WatchingHistory = mongoose.model('WatchingHistory', WatchingHistorySchema);
+export default WatchingHistory; // ✅ Use ESM export

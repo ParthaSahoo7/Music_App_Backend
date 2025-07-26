@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const WatchLaterSchema = new Schema({
@@ -19,4 +21,5 @@ const WatchLaterSchema = new Schema({
 // Unique index to prevent duplicate watch later entries
 WatchLaterSchema.index({ userId: 1, mediaId: 1 }, { unique: true });
 
-module.exports = mongoose.model('WatchLater', WatchLaterSchema);
+const WatchLater = mongoose.model('WatchLater', WatchLaterSchema);
+export default WatchLater; // ✅ Use ESM export

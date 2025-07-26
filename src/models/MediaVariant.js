@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema } = mongoose;
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
-
 const MediaVariantSchema = new Schema({
   mediaId: {
     type: Schema.Types.ObjectId,
@@ -22,4 +23,5 @@ const MediaVariantSchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('MediaVariant', MediaVariantSchema);
+const MediaVariant = mongoose.model('MediaVariant', MediaVariantSchema);
+export default MediaVariant; // ✅ Use ESM export

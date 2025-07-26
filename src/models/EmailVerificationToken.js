@@ -1,5 +1,8 @@
 // models/EmailVerificationToken.js
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+// const { Schema } = mongoose;
+const { Schema } = mongoose;
 
 const EmailVerificationTokenSchema = new mongoose.Schema({
   userId: {
@@ -22,4 +25,5 @@ const EmailVerificationTokenSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('EmailVerificationToken', EmailVerificationTokenSchema);
+const EmailVerificationToken = mongoose.model('EmailVerificationToken', EmailVerificationTokenSchema);
+export default EmailVerificationToken; // ✅ Use ESM export

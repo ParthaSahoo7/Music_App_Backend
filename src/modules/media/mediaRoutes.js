@@ -1,12 +1,16 @@
-const express = require('express');
-const { check } = require('express-validator');
-const authorizeUser = require('../../middlewares/authorizeUser');
-const mediaController = require('./mediaControllers');
+// const express = require('express');
+// const { check } = require('express-validator');
+// const authorizeUser = require('../../middlewares/authorizeUser');
+// const mediaController = require('./mediaControllers');
+import express from 'express';
+import { check } from 'express-validator';
+import authorizeUser from '../../middlewares/authorizeUser.js';
+import mediaController from './mediaControllers.js';
 
 const router = express.Router();
 
 router.post(
-  '/initiate-upload',
+  '/initiate-upload', 
   authorizeUser,
   [
     check('filename', 'Filename is required').notEmpty(),
@@ -21,9 +25,8 @@ router.post(
   [
     check('uploadId', 'Upload ID is required').notEmpty(),
     check('key', 'S3 key is required').notEmpty(),
-    check('partNumbers', 'Part numbers must be an array of integers').isArray({ min: 1 }).custom((value) => {
-      return value.every(num => Number.isInteger(num) && num >= 1);
-    }),
+    check('partNumbers', 'Part numbers must be an integers').notEmpty()
+
   ],
   mediaController.getPresignedUrlsController
 );
@@ -34,7 +37,6 @@ router.post(
   [
     check('uploadId', 'Upload ID is required').notEmpty(),
     check('key', 'S3 key is required').notEmpty(),
-    check('duration', 'Duration is required').isNumeric(),
     check('title', 'Title is required').notEmpty(),
     check('type', 'Media type is required').isIn(['movie', 'music', 'podcast']),
     check('parts', 'Parts must be an array').isArray({ min: 1 }),
@@ -96,4 +98,14 @@ router.delete(
   mediaController.deleteMediaController
 );
 
-module.exports = router;
+router.post(
+  '/thumbnail-upload',
+  authorizeUser,
+  [
+    check('mediaId', 'Media ID is required').isMongoId(),
+    check('thumbnailUrl', 'Thumbnail URL is required').notEmpty(),
+  ],
+  mediaController.uploadThumbnailController
+)
+
+export default router;
