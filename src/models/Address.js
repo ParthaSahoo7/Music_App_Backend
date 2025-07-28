@@ -16,9 +16,6 @@ const AddressSchema = new Schema({
   },
 }, { timestamps: true });
 
-// Index for efficient querying by user
-AddressSchema.index({ user: 1, isDefault: 1 });
-
 //export the Address model
 const Address = mongoose.model('Address', AddressSchema);
 export default Address; // ✅ Use ESM export

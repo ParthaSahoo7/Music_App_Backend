@@ -2,6 +2,7 @@
 import { logger } from '../config/logger.js';
 
 const createRequestLogger = (req) => {
+  console.log('🚀 Creating request logger');
   const logId = req.logId || '-';
   const userId = req.user?.userId || 'guest';
 

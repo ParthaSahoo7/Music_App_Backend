@@ -27,6 +27,9 @@ import authRoutes from './modules/auth/authRoutes.js';
 import mediaRoutes from './modules/media/mediaRoutes.js';
 import mediaLibraryRoutes from './modules/mediaLibrary/mediaLibraryRoutes.js';
 import artistRoutes from './modules/artist/artistRoutes.js';
+import storeRoutes from './modules/store/storeRoutes.js';
+import addressRoutes from './modules/address/addressRoutes.js';
+// import paymentRoutes from './modules/payment/paymentRoutes.js';
 import { logger, stream as morganStream } from './config/logger.js';
 import morganMiddleware from './middlewares/morgan.middleware.js';
 import assignLogId from './middlewares/assignLogId.middleware.js';
@@ -62,6 +65,9 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/media',mediaRoutes);
 app.use('/api/v1/media-library', mediaLibraryRoutes);
 app.use('/api/v1/artist', artistRoutes);
+app.use('/api/v1/store', storeRoutes);
+app.use('/api/v1/address', addressRoutes);
+// app.use('/api/v1/payment', paymentRoutes);
 
 app.get('/api/health', async (req, res) => {
   let dbStatus = 'disconnected';

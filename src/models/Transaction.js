@@ -26,8 +26,7 @@ const TransactionSchema = new Schema({
   },
 }, { timestamps: true });
 
-// Index for efficient querying by user and status
-TransactionSchema.index({ user: 1, status: 1 });
+
 
 // Export the Transaction model
 const Transaction = mongoose.model('Transaction', TransactionSchema);

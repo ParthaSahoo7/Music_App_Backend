@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Graphic T-Shirt",
+    "description": "100% cotton unisex t-shirt with vibrant graphic print.",
+    "price": 19.99,
+    "category": "Clothing",
+    "stock": 150,
+    "images": ["graphic-tshirt.jpg"]
+  },
+  {
+    "name": "Denim Jacket",
+    "description": "Classic blue denim jacket with button closure.",
+    "price": 49.99,
+    "category": "Clothing",
+    "stock": 60,
+    "images": ["denim-jacket.jpg"]
+  },
+  {
+    "name": "Snapback Cap",
+    "description": "Adjustable snapback hat with embroidered logo.",
+    "price": 15.0,
+    "category": "Merchandise",
+    "stock": 100,
+    "images": ["snapback.jpg"]
+  },
+  {
+    "name": "Pullover Hoodie",
+    "description": "Cozy hoodie with front pocket and drawstring hood.",
+    "price": 39.99,
+    "category": "Clothing",
+    "stock": 75,
+    "images": ["hoodie.jpg"]
+  },
+  {
+    "name": "Crew Socks (5-pack)",
+    "description": "Soft cotton crew socks, assorted colors.",
+    "price": 12.5,
+    "category": "Clothing",
+    "stock": 200,
+    "images": ["socks.jpg"]
+  },
+  {
+    "name": "Canvas Tote Bag",
+    "description": "Reusable cotton tote bag with printed artwork.",
+    "price": 9.99,
+    "category": "Merchandise",
+    "stock": 180,
+    "images": ["tote.jpg"]
+  },
+  {
+    "name": "Logo Beanie",
+    "description": "Warm knit beanie with stitched brand logo.",
+    "price": 14.99,
+    "category": "Merchandise",
+    "stock": 90,
+    "images": ["beanie.jpg"]
+  },
+  {
+    "name": "Athletic Shorts",
+    "description": "Breathable polyester shorts for training or casual wear.",
+    "price": 22.0,
+    "category": "Clothing",
+    "stock": 85,
+    "images": ["shorts.jpg"]
+  },
+  {
+    "name": "Embroidered Patch",
+    "description": "Iron-on embroidered patch for jackets or backpacks.",
+    "price": 4.99,
+    "category": "Merchandise",
+    "stock": 300,
+    "images": ["patch.jpg"]
+  },
+  {
+    "name": "Varsity Jacket",
+    "description": "Retro-style varsity jacket with wool body and leather sleeves.",
+    "price": 89.99,
+    "category": "Clothing",
+    "stock": 35,
+    "images": ["varsity.jpg"]
+  },
+  {
+    "name": "Tie-Dye Shirt",
+    "description": "Hand-dyed cotton shirt with vibrant colors.",
+    "price": 24.5,
+    "category": "Clothing",
+    "stock": 110,
+    "images": ["tiedye.jpg"]
+  },
+  {
+    "name": "Track Pants",
+    "description": "Slim-fit track pants with zip pockets and stripes.",
+    "price": 34.0,
+    "category": "Clothing",
+    "stock": 70,
+    "images": ["trackpants.jpg"]
+  },
+  {
+    "name": "Baseball Cap",
+    "description": "Classic curved-brim cap with adjustable strap.",
+    "price": 13.5,
+    "category": "Merchandise",
+    "stock": 120,
+    "images": ["baseballcap.jpg"]
+  },
+  {
+    "name": "Long Sleeve Tee",
+    "description": "Casual long-sleeve tee with minimal print.",
+    "price": 21.99,
+    "category": "Clothing",
+    "stock": 95,
+    "images": ["longsleeve.jpg"]
+  },
+  {
+    "name": "Wristband Set",
+    "description": "Set of 3 silicone wristbands with printed slogans.",
+    "price": 6.99,
+    "category": "Merchandise",
+    "stock": 250,
+    "images": ["wristbands.jpg"]
+  },
+  {
+    "name": "Windbreaker Jacket",
+    "description": "Lightweight windbreaker with zip front and hood.",
+    "price": 44.99,
+    "category": "Clothing",
+    "stock": 50,
+    "images": ["windbreaker.jpg"]
+  },
+  {
+    "name": "Fleece Joggers",
+    "description": "Comfortable jogger pants with fleece lining.",
+    "price": 32.0,
+    "category": "Clothing",
+    "stock": 60,
+    "images": ["joggers.jpg"]
+  },
+  {
+    "name": "Bucket Hat",
+    "description": "Cotton bucket hat with embroidered design.",
+    "price": 11.99,
+    "category": "Merchandise",
+    "stock": 100,
+    "images": ["buckethat.jpg"]
+  },
+  {
+    "name": "Polo Shirt",
+    "description": "Collared polo with contrast trim and buttons.",
+    "price": 27.5,
+    "category": "Clothing",
+    "stock": 80,
+    "images": ["polo.jpg"]
+  },
+  {
+    "name": "Lapel Pin",
+    "description": "Enamel lapel pin featuring custom artwork.",
+    "price": 5.5,
+    "category": "Merchandise",
+    "stock": 150,
+    "images": ["pin.jpg"]
+  }
+]

@@ -18,8 +18,6 @@ const CartSchema = new Schema({
   },
 }, { timestamps: true });
 
-// Index for efficient querying by user
-CartSchema.index({ user: 1 });
 
 // Export the Cart model
 const Cart = mongoose.model('Cart', CartSchema);

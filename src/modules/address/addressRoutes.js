@@ -1,13 +1,12 @@
 import express from "express";
 import { check } from "express-validator";
-
 import addressController from "./addressControllers.js";
 import authorizeUser from "../../middlewares/authorizeUser.js";
 const router = express.Router();
 
 
 router.post(
-  "/add-address",
+  "/",
   [
     check("addressLine1", "Address Line 1 is required").notEmpty(),
     check("city", "City is required").notEmpty(),
@@ -20,12 +19,12 @@ router.post(
 );
 
 router.get(
-  "/get-addresses",
+  "/",
   authorizeUser,
   addressController.getAddresses
 );
 router.put(
-  "/update-address/:id",
+  "/:id",
   [
     check("addressLine1", "Address Line 1 is required").notEmpty(),
     check("city", "City is required").notEmpty(),
@@ -37,25 +36,25 @@ router.put(
   addressController.updateAddress
 );
 router.delete(
-  "/delete-address/:id",
+  "/:id",
   authorizeUser,
   addressController.deleteAddress
 );
 
 router.get(
-  "/get-address/:id",
+  "/:id",
   authorizeUser,
   addressController.getAddressById
 );
 
 router.get(
-  "/get-default-address",
+  "/default-address",
   authorizeUser,
   addressController.getDefaultAddress
 );
 
 router.put(
-  "/set-default-address/:id",
+  "/default-address/:id",
   authorizeUser,
   addressController.setDefaultAddress
 );

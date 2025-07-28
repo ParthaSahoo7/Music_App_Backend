@@ -10,7 +10,7 @@ const MediaVariantSchema = new Schema({
   },
   resolution: {
     type: String,
-    enum: ['240p', '480p', '720p', '1080p', '4K'],
+    enum: ['240p', '480p', '720p', '1080p','1440p', '4K'],
     required: true,
   },
   streamUrl: { type: String, required: true },

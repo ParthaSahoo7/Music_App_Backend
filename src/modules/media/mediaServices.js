@@ -30,7 +30,7 @@ import {
   AbortMultipartUploadCommand,
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { MediaConvertClient, CreateJobCommand } from '@aws-sdk/client-mediaconvert';
+import { MediaConvertClient, CreateJobCommand,GetJobCommand } from '@aws-sdk/client-mediaconvert';
 import Media from '../../models/Media.js';
 import MediaVariant from '../../models/MediaVariant.js';
 import UserAuth from '../../models/UserAuth.js';
@@ -105,7 +105,7 @@ const getPresignedUrls = async (userId, uploadId, key, partNumbers) => {
   return urls;
 };
 
-const completeUpload = async (userId, { uploadId, key, title, description, type, genres, tags, ageRating, parts }) => {
+const completeUpload = async (userId, { uploadId, key, title, description, type, genres, tags,  parts }) => {
   const log = createRequestLogger({ userId });
   log.info(`Completing multipart upload for key: ${key}`);
 
@@ -120,6 +120,7 @@ const completeUpload = async (userId, { uploadId, key, title, description, type,
     throw new Error('Multipart upload not found or unauthorized');
   }
 
+  // Complete the multipart upload
   const completeCommand = new CompleteMultipartUploadCommand({
     Bucket: process.env.AWS_S3_BUCKET,
     Key: key,
@@ -129,14 +130,13 @@ const completeUpload = async (userId, { uploadId, key, title, description, type,
 
   await s3.send(completeCommand);
 
-  // Fetch user to determine uploaderType
   const user = await UserAuth.findById(userId);
   if (!user) {
     throw new Error('User not found');
   }
-  const uploaderType = user.role === 'admin' || user.role === 'artist' ? user.role : 'artist'; // Default to 'artist' for consistency
 
-  // Save metadata to MongoDB
+  const uploaderType = user.role === 'admin' || user.role === 'artist' ? user.role : 'artist';
+
   const media = new Media({
     uploadedBy: userId,
     uploaderType,
@@ -145,9 +145,9 @@ const completeUpload = async (userId, { uploadId, key, title, description, type,
     title,
     description,
     type,
-    genres: genres || [],
-    tags: tags || [],
-    ageRating,
+    genres: Array.isArray(genres) ? genres : (typeof genres === 'string' ? genres.split(',') : []),
+    tags: Array.isArray(tags) ? tags : (typeof tags === 'string' ? tags.split(',') : []),
+
     transcodingStatus: 'processing',
   });
 
@@ -161,6 +161,7 @@ const completeUpload = async (userId, { uploadId, key, title, description, type,
   return media;
 };
 
+
 const createMediaConvertJob = async (media) => {
   const outputS3Prefix = `transcoded/${media._id}/`;
   const settings = {
@@ -172,7 +173,7 @@ const createMediaConvertJob = async (media) => {
           Type: 'HLS_GROUP_SETTINGS',
           HlsGroupSettings: {
             Destination: `s3://${process.env.AWS_S3_BUCKET}/${outputS3Prefix}`,
-            SegmentDuration: 6,
+            SegmentLength: 6,
             MinSegmentLength: 0,
           },
         },
@@ -402,68 +403,41 @@ const createMediaConvertJob = async (media) => {
   return await mediaConvert.send(new CreateJobCommand(params));
 };
 
-const saveMediaVariants = async (mediaId, jobOutput) => {
+const saveMediaVariants = async (mediaId) => {
   const log = createRequestLogger({ mediaId });
-  log.info(`Saving media variants for mediaId: ${mediaId}`);
+  log.info(`Saving media variants and master playlist for mediaId: ${mediaId}`);
 
   const media = await Media.findById(mediaId);
-  if (!media) {
-    throw new Error('Media not found');
-  }
+  if (!media) throw new Error('Media not found');
+
+  // Extract original filename (e.g., 0724.mp4 → 0724)
+  const originalKey = media.s3KeyOriginal.split('/').pop(); // "0724.mp4"
+  const baseName = originalKey.replace(/\.[^/.]+$/, ''); // Remove .mp4
+
+  const baseUrl = `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}`;
 
   const variants = [
-    {
-      resolution: '240p',
-      streamUrl: `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}/output_240p.m3u8`,
-      format: 'hls',
-      bitrate: 500,
-    },
-    {
-      resolution: '480p',
-      streamUrl: `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}/output_480p.m3u8`,
-      format: 'hls',
-      bitrate: 1000,
-    },
-    {
-      resolution: '720p',
-      streamUrl: `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}/output_720p.m3u8`,
-      format: 'hls',
-      bitrate: 2500,
-    },
-    {
-      resolution: '1080p',
-      streamUrl: `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}/output_1080p.m3u8`,
-      format: 'hls',
-      bitrate: 5000,
-    },
-    {
-      resolution: '1440p',
-      streamUrl: `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}/output_1440p.m3u8`,
-      format: 'hls',
-      bitrate: 8000,
-    },
-    {
-      resolution: '4K',
-      streamUrl: `${process.env.AWS_S3_BUCKET_URL}/transcoded/${mediaId}/output_2160p.m3u8`,
-      format: 'hls',
-      bitrate: 15000,
-    },
+    { resolution: '240p', streamUrl: `${baseUrl}/${baseName}_240p.m3u8`, format: 'hls', bitrate: 500 },
+    { resolution: '480p', streamUrl: `${baseUrl}/${baseName}_480p.m3u8`, format: 'hls', bitrate: 1000 },
+    { resolution: '720p', streamUrl: `${baseUrl}/${baseName}_720p.m3u8`, format: 'hls', bitrate: 2500 },
+    { resolution: '1080p', streamUrl: `${baseUrl}/${baseName}_1080p.m3u8`, format: 'hls', bitrate: 5000 },
+    { resolution: '1440p', streamUrl: `${baseUrl}/${baseName}_1440p.m3u8`, format: 'hls', bitrate: 8000 },
+    { resolution: '4K', streamUrl: `${baseUrl}/${baseName}_2160p.m3u8`, format: 'hls', bitrate: 15000 },
   ];
 
   for (const variant of variants) {
-    const mediaVariant = new MediaVariant({
-      mediaId,
-      ...variant,
-    });
-    await mediaVariant.save();
+    await MediaVariant.create({ mediaId, ...variant });
     log.info(`Saved variant: ${variant.resolution}`);
   }
 
+  media.mediaUrl = `${baseUrl}/${baseName}.m3u8`; // ✅ Master playlist
   media.transcodingStatus = 'completed';
   await media.save();
 
   return variants;
 };
+
+
 
 const abortUpload = async (userId, uploadId, key) => {
   const log = createRequestLogger({ userId });
@@ -537,16 +511,46 @@ const getAllMedia = async (userId, queryParams) => {
   return await Media.find(query).populate('uploadedBy', 'username email');
 };
 
+const getAllMediaVariant = async (mediaId) => {
+  return await MediaVariant.find({ mediaId });
+};
+
+
 const getMediaById = async (userId, mediaId) => {
   const log = createRequestLogger({ userId });
   log.info(`Fetching media by ID: ${mediaId}`);
 
-  const media = await Media.findById(mediaId).populate('uploadedBy', 'username email');
-  if (!media || (media.visibility !== 'public' && media.uploadedBy.toString() !== userId.toString())) {
-    throw new Error('Media not found or unauthorized');
+  let media = await Media.findById(mediaId).populate('uploadedBy', 'username email');
+  // if (!media || (media.visibility !== 'public' && media.uploadedBy.toString() !== userId.toString())) {
+  //   throw new Error('Media not found or unauthorized');
+  // }
+
+  // Lazy transcoding check
+  if (media.transcodingStatus === 'processing' && media.mediaConvertJobId) {
+    const { Job } = await mediaConvert.send(new GetJobCommand({ Id: media.mediaConvertJobId }));
+    console.log("MediaConvert Job Status:", Job.Status);
+    
+    if (Job.Status === 'COMPLETE') {
+      if (!media.mediaUrl) {
+        await saveMediaVariants(media._id); // Populate mediaUrl + variants
+        media = await Media.findById(mediaId).populate('uploadedBy', 'username email');
+      }
+    } else if (Job.Status === 'ERROR') {
+      media.transcodingStatus = 'failed';
+      await media.save();
+      throw new Error('Media transcoding failed. Please try again later.');
+    } else {
+      throw new Error('Media is still being processed. Please check back shortly.');
+    }
   }
-  return media;
+
+  // Fetch variants now that they should exist
+  const variants = await MediaVariant.find({ mediaId: media._id });
+
+  return { media, variants };
 };
+
+
 
 const updateMedia = async (userId, mediaId, updateData) => {
   const log = createRequestLogger({ userId });
@@ -610,5 +614,5 @@ export default {
   updateMedia,
   deleteMedia,
   uploadThumbnail,
-  createMediaConvertJob,
+  getAllMediaVariant,
 };

@@ -22,8 +22,7 @@ const OrderSchema = new Schema({
     default: 'pending',
   },
 }, { timestamps: true });   
-// Index for efficient querying by user
-OrderSchema.index({ user: 1 });
+
 // Export the Order model
 const Order = mongoose.model('Order', OrderSchema);
 export default Order; // ✅ Use ESM export
