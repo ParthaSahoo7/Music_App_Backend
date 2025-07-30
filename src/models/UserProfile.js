@@ -32,10 +32,6 @@ const UserProfileSchema = new mongoose.Schema({
         enum: ['user','admin','artist'],
         default: 'user'
     },
-    subscriptionId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Subscription'
-    },
     preferences: {
         type: Object,
         default: {}

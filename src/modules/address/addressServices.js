@@ -1,20 +1,26 @@
 import Address from './../../models/Address.js';
-import { validationResult } from 'express-validator';
-import UserAuth from '../../models/UserAuth.js';
 import { successResponse, errorResponse } from '../../utils/responseTemplate.js';
-import { createRequestLogger } from '../../utils/requestLogger.js';
 
-
-//   addAddress,
-
-const addAddress = async( userId, addressData ) => {
-    const log = createRequestLogger();
+const addAddress = async (userId, addressData, log) => {
     log.info('Adding new address', { userId, addressData });
 
     try {
+        // Check if user has any existing non-deleted addresses
+        const existingAddresses = await Address.find({ user: userId, isDeleted: false });
+        const isFirstAddress = existingAddresses.length === 0;
+
+        // If the new address is set as default, clear existing defaults
+        if (addressData.isDefault) {
+            await Address.updateMany(
+                { user: userId, isDefault: true, isDeleted: false },
+                { isDefault: false }
+            );
+        }
+
         const address = new Address({
             ...addressData,
-            user: userId
+            user: userId,
+            isDefault: isFirstAddress ? true : (addressData.isDefault || false)
         });
         const savedAddress = await address.save();
         log.info('Address added successfully', { addressId: savedAddress._id });
@@ -25,10 +31,7 @@ const addAddress = async( userId, addressData ) => {
     }
 };
 
-//   getAddresses (isDeleted = false),
-
-const getAddresses = async(userId, isDeleted = false) => {
-    const log = createRequestLogger();
+const getAddresses = async (userId, isDeleted = false, log) => {
     log.info('Fetching addresses', { userId, isDeleted });
     try {
         const addresses = await Address.find({ user: userId, isDeleted: isDeleted });
@@ -39,12 +42,18 @@ const getAddresses = async(userId, isDeleted = false) => {
         throw new Error('Failed to fetch addresses. Please try again.');
     }
 };
-//   updateAddress,
 
-const updateAddress = async(userId, addressId, addressData) => {
-    const log = createRequestLogger();
+const updateAddress = async (userId, addressId, addressData, log) => {
     log.info('Updating address', { userId, addressId, addressData });
     try {
+        // If updating to set as default, clear other defaults
+        if (addressData.isDefault) {
+            await Address.updateMany(
+                { user: userId, isDefault: true, isDeleted: false },
+                { isDefault: false }
+            );
+        }
+
         const address = await Address.findOneAndUpdate(
             { _id: addressId, user: userId },
             addressData,
@@ -61,10 +70,8 @@ const updateAddress = async(userId, addressId, addressData) => {
         throw new Error('Failed to update address. Please try again.');
     }
 };
-//   deleteAddress (soft delete),
 
-const deleteAddress = async(userId, addressId) => {
-    const log = createRequestLogger();
+const deleteAddress = async (userId, addressId, log) => {
     log.info('Deleting address', { userId, addressId });
     try {
         const address = await Address.findOneAndUpdate(
@@ -76,6 +83,25 @@ const deleteAddress = async(userId, addressId) => {
             log.warn('Address not found or does not belong to user', { addressId, userId });
             throw new Error('Address not found or does not belong to user.');
         }
+
+        // If the deleted address was default, check if other addresses exist
+        if (address.isDefault) {
+            const remainingAddresses = await Address.find({ 
+                user: userId, 
+                isDeleted: false, 
+                _id: { $ne: addressId } 
+            });
+            if (remainingAddresses.length > 0) {
+                // Set the first remaining address as default
+                await Address.findOneAndUpdate(
+                    { _id: remainingAddresses[0]._id, user: userId },
+                    { isDefault: true },
+                    { new: true }
+                );
+                log.info('New default address set', { newDefaultAddressId: remainingAddresses[0]._id });
+            }
+        }
+
         log.info('Address deleted successfully', { addressId: address._id });
         return address;
     } catch (error) {
@@ -83,10 +109,8 @@ const deleteAddress = async(userId, addressId) => {
         throw new Error('Failed to delete address. Please try again.');
     }
 };
-//   getAddressById,
 
-const getAddressById = async(userId, addressId) => {
-    const log = createRequestLogger();
+const getAddressById = async (userId, addressId, log) => {
     log.info('Fetching address by ID', { userId, addressId });
     try {
         const address = await Address.findOne({ _id: addressId, user: userId });
@@ -101,10 +125,8 @@ const getAddressById = async(userId, addressId) => {
         throw new Error('Failed to fetch address. Please try again.');
     }
 };
-//   getDefaultAddress,
 
-const getDefaultAddress = async(userId) => {
-    const log = createRequestLogger();
+const getDefaultAddress = async (userId, log) => {
     log.info('Fetching default address', { userId });
     try {
         const address = await Address.findOne({ user: userId, isDefault: true, isDeleted: false });
@@ -119,24 +141,25 @@ const getDefaultAddress = async(userId) => {
         throw new Error('Failed to fetch default address. Please try again.');
     }
 };
-//   setDefaultAddress
 
-const setDefaultAddress = async(userId, addressId) => {
-    const log = createRequestLogger();
+const setDefaultAddress = async (userId, addressId, log) => {
     log.info('Setting default address', { userId, addressId });
     try {
         // Clear existing default address
-        await Address.updateMany({ user: userId, isDefault: true }, { isDefault: false });
+        await Address.updateMany(
+            { user: userId, isDefault: true, isDeleted: false },
+            { isDefault: false }
+        );
 
         // Set new default address
         const address = await Address.findOneAndUpdate(
-            { _id: addressId, user: userId },
+            { _id: addressId, user: userId, isDeleted: false },
             { isDefault: true },
             { new: true }
         );
         if (!address) {
-            log.warn('Address not found or does not belong to user', { addressId, userId });
-            throw new Error('Address not found or does not belong to user.');
+            log.warn('Address not found, does not belong to user, or is deleted', { addressId, userId });
+            throw new Error('Address not found, does not belong to user, or is deleted.');
         }
         log.info('Default address set successfully', { addressId: address._id });
         return address;
@@ -144,7 +167,7 @@ const setDefaultAddress = async(userId, addressId) => {
         log.error('Error setting default address', { error: error.message });
         throw new Error('Failed to set default address. Please try again.');
     }
-}   
+};
 
 export default {
     addAddress,

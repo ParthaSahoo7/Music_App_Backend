@@ -20,7 +20,7 @@ const addAddress = async (req, res) => {
     const userId = req.user.userId;
     const addressData = req.body;
 
-    const newAddress = await addressService.addAddress(userId, addressData);
+    const newAddress = await addressService.addAddress(userId, addressData, log);
     return res.status(201).json(successResponse(newAddress, 'Address added successfully.'));
   } catch (error) {
     log.error(`Error adding address: ${error.message}`);
@@ -36,7 +36,7 @@ const getAddresses = async (req, res) => {
 
   try {
     const userId = req.user.userId;
-    const addresses = await addressService.getAddresses(userId);
+    const addresses = await addressService.getAddresses(userId, false, log);
     return res.status(200).json(successResponse(addresses, 'Addresses fetched successfully.'));
   } catch (error) {
     log.error(`Error fetching addresses: ${error.message}`);
@@ -44,7 +44,7 @@ const getAddresses = async (req, res) => {
       message: 'Failed to fetch addresses. Please try again.',
     }, 500));
   }
-}
+};
 
 const updateAddress = async (req, res) => {
   const log = createRequestLogger(req);
@@ -62,7 +62,7 @@ const updateAddress = async (req, res) => {
 
     const userId = req.user.userId;
     const addressId = req.params.id;
-    const updatedAddress = await addressService.updateAddress(userId, addressId, req.body);
+    const updatedAddress = await addressService.updateAddress(userId, addressId, req.body, log);
 
     return res.status(200).json(successResponse(updatedAddress, 'Address updated successfully.'));
   } catch (error) {
@@ -71,7 +71,7 @@ const updateAddress = async (req, res) => {
       message: error.message || 'Failed to update address.',
     }, 400));
   }
-}   
+};
 
 const deleteAddress = async (req, res) => {
   const log = createRequestLogger(req);
@@ -80,7 +80,7 @@ const deleteAddress = async (req, res) => {
   try {
     const userId = req.user.userId;
     const addressId = req.params.id;
-    await addressService.deleteAddress(userId, addressId);
+    await addressService.deleteAddress(userId, addressId, log);
 
     return res.status(200).json(successResponse(null, 'Address deleted successfully.'));
   } catch (error) {
@@ -89,7 +89,7 @@ const deleteAddress = async (req, res) => {
       message: error.message || 'Failed to delete address.',
     }, 400));
   }
-};  
+};
 
 const getAddressById = async (req, res) => {
   const log = createRequestLogger(req);
@@ -98,7 +98,7 @@ const getAddressById = async (req, res) => {
   try {
     const userId = req.user.userId;
     const addressId = req.params.id;
-    const address = await addressService.getAddressById(userId, addressId);
+    const address = await addressService.getAddressById(userId, addressId, log);
 
     return res.status(200).json(successResponse(address, 'Address retrieved successfully.'));
   } catch (error) {
@@ -107,18 +107,19 @@ const getAddressById = async (req, res) => {
       message: error.message || 'Failed to fetch address.',
     }, 400));
   }
-}
+};
 
 const getDefaultAddress = async (req, res) => {
   const log = createRequestLogger(req);
-  log.info('Fetching default address');
+  log.info('Fetching default addressssssssssssssss');
 
   try {
     const userId = req.user.userId;
-    const defaultAddress = await addressService.getDefaultAddress(userId);
+    const defaultAddress = await addressService.getDefaultAddress(userId, log);
 
     return res.status(200).json(successResponse(defaultAddress, 'Default address retrieved successfully.'));
   } catch (error) {
+    console.log("##############################################", error);
     log.error(`Error fetching default address: ${error.message}`);
     return res.status(400).json(errorResponse({
       message: error.message || 'Failed to fetch default address.',
@@ -133,7 +134,7 @@ const setDefaultAddress = async (req, res) => {
   try {
     const userId = req.user.userId;
     const addressId = req.params.id;
-    const updatedAddress = await addressService.setDefaultAddress(userId, addressId);
+    const updatedAddress = await addressService.setDefaultAddress(userId, addressId, log);
 
     return res.status(200).json(successResponse(updatedAddress, 'Default address set successfully.'));
   } catch (error) {
@@ -142,7 +143,7 @@ const setDefaultAddress = async (req, res) => {
       message: error.message || 'Failed to set default address.',
     }, 400));
   }
-}
+};
 
 export default {
   addAddress,

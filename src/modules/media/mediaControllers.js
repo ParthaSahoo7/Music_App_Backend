@@ -349,7 +349,7 @@ const updateMediaController = async (req, res) => {
       );
     }
 
-    const userId = req.user._id;
+    const userId = req.user.userId;
     const media = await mediaService.updateMedia(
       userId,
       req.params.id,
