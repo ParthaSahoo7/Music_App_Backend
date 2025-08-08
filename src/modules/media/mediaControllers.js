@@ -181,6 +181,92 @@ const completeUploadController = async (req, res) => {
   }
 };
 
+const initiateThumbnailUploadController = async (req, res) => {
+  const log = createRequestLogger(req);
+  log.info('Initiating thumbnail upload');
+
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      log.warn('Validation failed during thumbnail upload initiation');
+      return res.status(400).json(
+        errorResponse(
+          {
+            message: 'Invalid input for initiating thumbnail upload',
+            errors: errors.array(),
+          },
+          400
+        )
+      );
+    }
+
+    const { mediaId, filename, contentType } = req.body;
+    const userId = req.user.userId;
+
+    const { presignedUrl, key } = await mediaService.initiateThumbnailUpload(userId, mediaId, {
+      filename,
+      contentType,
+    });
+
+    return res.status(200).json(
+      successResponse(
+        { presignedUrl, key },
+        'Presigned URL for thumbnail upload generated successfully.'
+      )
+    );
+  } catch (error) {
+    log.error(`Error initiating thumbnail upload: ${error.message}`);
+    return res.status(400).json(
+      errorResponse(
+        {
+          message: error.message || 'Failed to initiate thumbnail upload.',
+        },
+        400
+      )
+    );
+  }
+};
+
+const uploadThumbnailController = async (req, res) => {
+  const log = createRequestLogger(req);
+  log.info('Completing thumbnail upload');
+
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      log.warn('Validation failed during thumbnail upload');
+      return res.status(400).json(
+        errorResponse(
+          {
+            message: 'Invalid input for thumbnail upload',
+            errors: errors.array(),
+          },
+          400
+        )
+      );
+    }
+
+    const { mediaId, key } = req.body;
+    const userId = req.user.userId;
+
+    const result = await mediaService.uploadThumbnail(userId, mediaId, key);
+
+    return res.status(200).json(
+      successResponse(result, 'Thumbnail uploaded successfully.')
+    );
+  } catch (error) {
+    log.error(`Error uploading thumbnail: ${error.message}`);
+    return res.status(400).json(
+      errorResponse(
+        {
+          message: error.message || 'Failed to upload thumbnail.',
+        },
+        400
+      )
+    );
+  }
+};
+
 const abortUploadController = async (req, res) => {
   const log = createRequestLogger(req);
   log.info("Aborting media upload");
@@ -201,7 +287,7 @@ const abortUploadController = async (req, res) => {
     }
 
     const { uploadId, key } = req.body;
-    const userId = req.user._id;
+    const userId = req.user.userId;
 
     const result = await mediaService.abortUpload(userId, uploadId, key);
 
@@ -241,7 +327,7 @@ const getMediaAccessUrlController = async (req, res) => {
     }
 
     const { mediaId, variantResolution } = req.body;
-    const userId = req.user._id;
+    const userId = req.user.userId;
 
     const accessUrl = await mediaService.getMediaAccessUrl(
       userId,
@@ -377,7 +463,7 @@ const deleteMediaController = async (req, res) => {
   log.info(`Deleting media: ${req.params.id}`);
 
   try {
-    const userId = req.user._id;
+    const userId = req.user.userId;
     const result = await mediaService.deleteMedia(userId, req.params.id);
 
     return res
@@ -396,49 +482,49 @@ const deleteMediaController = async (req, res) => {
   }
 };
 
-const uploadThumbnailController = async (req, res) => {
-  const log = createRequestLogger(req);
-  log.info("Uploading thumbnail for media");
+// const uploadThumbnailController = async (req, res) => {
+//   const log = createRequestLogger(req);
+//   log.info("Uploading thumbnail for media");
 
-  try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      log.warn("Validation failed during thumbnail upload");
-      return res.status(400).json(
-        errorResponse(
-          {
-            message: "Invalid input for thumbnail upload",
-            errors: errors.array(),
-          },
-          400
-        )
-      );
-    }
+//   try {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       log.warn("Validation failed during thumbnail upload");
+//       return res.status(400).json(
+//         errorResponse(
+//           {
+//             message: "Invalid input for thumbnail upload",
+//             errors: errors.array(),
+//           },
+//           400
+//         )
+//       );
+//     }
 
-    const { mediaId, thumbnailUrl } = req.body;
-    const userId = req.user._id;
+//     const { mediaId, thumbnailUrl } = req.body;
+//     const userId = req.user.userId;
 
-    const result = await mediaService.uploadThumbnail(
-      userId,
-      mediaId,
-      thumbnailUrl
-    );
+//     const result = await mediaService.uploadThumbnail(
+//       userId,
+//       mediaId,
+//       thumbnailUrl
+//     );
 
-    return res
-      .status(200)
-      .json(successResponse(result, "Thumbnail uploaded successfully"));
-  } catch (error) {
-    log.error(`Error uploading thumbnail: ${error.message}`);
-    return res.status(400).json(
-      errorResponse(
-        {
-          message: error.message || "Failed to upload thumbnail.",
-        },
-        400
-      )
-    );
-  }
-};
+//     return res
+//       .status(200)
+//       .json(successResponse(result, "Thumbnail uploaded successfully"));
+//   } catch (error) {
+//     log.error(`Error uploading thumbnail: ${error.message}`);
+//     return res.status(400).json(
+//       errorResponse(
+//         {
+//           message: error.message || "Failed to upload thumbnail.",
+//         },
+//         400
+//       )
+//     );
+//   }
+// };
 
 export default {
   initiateUploadController,
@@ -451,4 +537,5 @@ export default {
   updateMediaController,
   deleteMediaController,
   uploadThumbnailController,
+  initiateThumbnailUploadController
 };

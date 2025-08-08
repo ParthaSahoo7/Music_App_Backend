@@ -1,31 +1,46 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const SubscriptionSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserAuth',
-        required: true,
-        index: true
-    },
-    plan: {
+const SubscriptionSchema = new Schema({
+    name: {
         type: String,
-        enum: ['free', 'premium', 'premium+'],
         required: true,
-        default: 'free'
+        unique: true,
+        enum: ['Free', 'Premium', 'Premium+'],
+        trim: true
     },
-    status: {
+    price: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    currency: {
         type: String,
-        enum: ['active', 'expired', 'canceled'],
-        default: 'active'
-    },
-    startDate: {
-        type: Date,
         required: true,
-        default: Date.now
+        default: 'USD',
+        trim: true
     },
-    endDate: {
-        type: Date
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    features: [{
+        type: String,
+        trim: true
+    }],
+    durationMonths: {
+        type: Number,
+        required: true,
+        min: 0
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+    stripePriceId: {
+        type: String,
+        required: function() { return this.name !== 'Free'; }
     }
 }, { timestamps: true });
 

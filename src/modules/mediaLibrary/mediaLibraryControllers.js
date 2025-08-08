@@ -248,7 +248,7 @@ const addToFavourites = async (req, res) => {
     }
 
     const { mediaId } = req.body;
-    const userId = req.user._id;
+    const userId = req.user.userId;
 
     const favourite = await mediaLibraryService.addToFavourites(userId, mediaId);
 
@@ -275,7 +275,7 @@ const removeFromFavourites = async (req, res) => {
       }, 400));
     }
 
-    const userId = req.user._id;
+    const userId = req.user.userId;
     await mediaLibraryService.removeFromFavourites(userId, req.params.mediaId);
 
     return res.status(200).json(successResponse(null, 'Media removed from favourites successfully'));
@@ -292,7 +292,7 @@ const getFavourites = async (req, res) => {
   log.info('Fetching favourites');
 
   try {
-    const userId = req.user._id;
+    const userId = req.user.userId;
     const favourites = await mediaLibraryService.getFavourites(userId);
 
     return res.status(200).json(successResponse(favourites, 'Favourites retrieved successfully'));
@@ -319,7 +319,7 @@ const addToWatchLater = async (req, res) => {
     }
 
     const { mediaId } = req.body;
-    const userId = req.user._id;
+    const userId = req.user.userId;
 
     const watchLater = await mediaLibraryService.addToWatchLater(userId, mediaId);
 
@@ -346,7 +346,7 @@ const removeFromWatchLater = async (req, res) => {
       }, 400));
     }
 
-    const userId = req.user._id;
+    const userId = req.user.userId;
     await mediaLibraryService.removeFromWatchLater(userId, req.params.mediaId);
 
     return res.status(200).json(successResponse(null, 'Media removed from watch later successfully'));
@@ -363,7 +363,7 @@ const getWatchLater = async (req, res) => {
   log.info('Fetching watch later');
 
   try {
-    const userId = req.user._id;
+    const userId = req.user.userId;
     const watchLater = await mediaLibraryService.getWatchLater(userId);
 
     return res.status(200).json(successResponse(watchLater, 'Watch later list retrieved successfully'));
@@ -390,7 +390,7 @@ const initiateDownload = async (req, res) => {
     }
 
     const { mediaId, mediaVariantId, resolution, fileSize } = req.body;
-    const userId = req.user._id;
+    const userId = req.user.userId;
 
     const download = await mediaLibraryService.initiateDownload(userId, { mediaId, mediaVariantId, resolution, fileSize });
 
@@ -408,7 +408,7 @@ const getDownloads = async (req, res) => {
   log.info('Fetching downloads');
 
   try {
-    const userId = req.user._id;
+    const userId = req.user.userId;
     const downloads = await mediaLibraryService.getDownloads(userId);
 
     return res.status(200).json(successResponse(downloads, 'Downloads retrieved successfully'));
@@ -434,7 +434,7 @@ const deleteDownload = async (req, res) => {
       }, 400));
     }
 
-    const userId = req.user._id;
+    const userId = req.user.userId;
     await mediaLibraryService.deleteDownload(userId, req.params.id);
 
     return res.status(200).json(successResponse(null, 'Download deleted successfully'));

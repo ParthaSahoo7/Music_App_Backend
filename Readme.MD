@@ -1,3 +1,4 @@
+#
 s3://your-bucket-name/
 │
 ├── admin/                                             # Admin role

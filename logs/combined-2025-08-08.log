@@ -1,0 +1,32 @@
+2025-08-08 11:11:56 [INFO] [logId:-] [user:guest]: Starting server initialization...
+2025-08-08 11:11:56 [INFO] [logId:-] [user:guest]: Connecting to database...
+2025-08-08 11:11:57 [INFO] [logId:-] [user:guest]: MongoDB connected successfully
+2025-08-08 11:11:57 [INFO] [logId:-] [user:guest]: Database connected successfully.
+2025-08-08 11:11:57 [INFO] [logId:-] [user:guest]: ✅ Server running on http://localhost:3003
+2025-08-08 11:13:35 [INFO] [logId:262ab4f6-d9a1-4104-ba46-70e77c3395c0] [user:guest]: Request completed | meta: {"method":"POST","url":"/api/v1/payment/subscription","status":401,"responseTime":"7.661 ms","ip":"::1","userAgent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36","referer":"http://127.0.0.1:5500/","requestBody":{"subscriptionId":"68945947a6fe9a3a9231f509"},"query":{},"params":{}}
+2025-08-08 11:13:58 [INFO] [logId:ddd949c8-c31e-4735-8067-948f1382f183] [user:guest]: Request completed | meta: {"method":"POST","url":"/api/v1/payment/subscription","status":401,"responseTime":"7.416 ms","ip":"::1","userAgent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36","referer":"http://127.0.0.1:5500/","requestBody":{"subscriptionId":"68945947a6fe9a3a9231f509"},"query":{},"params":{}}
+2025-08-08 11:17:28 [INFO] [logId:855eb304-1e30-4362-a9d3-46fa7709bb87] [user:guest]: Incoming login request
+2025-08-08 11:17:28 [INFO] [logId:855eb304-1e30-4362-a9d3-46fa7709bb87] [user:guest]: Request completed | meta: {"method":"POST","url":"/api/v1/auth/login","status":401,"responseTime":"429.700 ms","ip":"::1","userAgent":"PostmanRuntime/7.44.1","referer":"","requestBody":{"email":"aksbhabua09@gmail.com"},"query":{},"params":{}}
+2025-08-08 11:18:03 [INFO] [logId:0ee1525d-386f-48b6-b623-341c07a150a5] [user:guest]: Incoming login request
+2025-08-08 11:18:04 [INFO] [logId:0ee1525d-386f-48b6-b623-341c07a150a5] [user:guest]: Request completed | meta: {"method":"POST","url":"/api/v1/auth/login","status":200,"responseTime":"374.706 ms","ip":"::1","userAgent":"PostmanRuntime/7.44.1","referer":"","requestBody":{"email":"digvijay.singh@loyaltty.com"},"query":{},"params":{}}
+2025-08-08 11:18:32 [INFO] [logId:7f29c1ea-52c5-4542-aa7b-4218fe2c2b65] [user:guest]: Request completed | meta: {"method":"GET","url":"/api/v1/subscription","status":404,"responseTime":"2.180 ms","ip":"::1","userAgent":"PostmanRuntime/7.44.1","referer":"","requestBody":{},"query":{},"params":{}}
+2025-08-08 11:20:40 [INFO] [logId:-] [user:guest]: Starting server initialization...
+2025-08-08 11:20:40 [INFO] [logId:-] [user:guest]: Connecting to database...
+2025-08-08 11:20:42 [INFO] [logId:-] [user:guest]: MongoDB connected successfully
+2025-08-08 11:20:42 [INFO] [logId:-] [user:guest]: Database connected successfully.
+2025-08-08 11:20:42 [INFO] [logId:-] [user:guest]: ✅ Server running on http://localhost:3003
+2025-08-08 11:20:55 [INFO] [logId:93911450-50b5-4e85-bc03-809962800ca4] [user:6870cc61d94fb7565374015f]: Fetching all subscriptions for user
+2025-08-08 11:20:55 [INFO] [logId:93911450-50b5-4e85-bc03-809962800ca4] [user:6870cc61d94fb7565374015f]: Fetching all subscriptions from the database
+2025-08-08 11:20:55 [INFO] [logId:93911450-50b5-4e85-bc03-809962800ca4] [user:6870cc61d94fb7565374015f]: Fetched 3 subscriptions successfully
+2025-08-08 11:20:55 [INFO] [logId:93911450-50b5-4e85-bc03-809962800ca4] [user:6870cc61d94fb7565374015f]: Fetched all subscriptions successfully
+2025-08-08 11:20:55 [INFO] [logId:93911450-50b5-4e85-bc03-809962800ca4] [user:6870cc61d94fb7565374015f]: Request completed | meta: {"method":"GET","url":"/api/v1/subscription","status":200,"responseTime":"270.195 ms","ip":"::1","userAgent":"PostmanRuntime/7.44.1","referer":"","requestBody":{},"query":{},"params":{}}
+2025-08-08 11:21:10 [INFO] [logId:e7bb3a62-5497-4f7c-9027-2962a7a73085] [user:6870cc61d94fb7565374015f]: Adding new subscription payment
+2025-08-08 11:21:10 [INFO] [logId:e7bb3a62-5497-4f7c-9027-2962a7a73085] [user:6870cc61d94fb7565374015f]: Initiating new subscription payment
+2025-08-08 11:21:12 [INFO] [logId:e7bb3a62-5497-4f7c-9027-2962a7a73085] [user:6870cc61d94fb7565374015f]: Stripe customer retrieved or created
+2025-08-08 11:21:14 [INFO] [logId:e7bb3a62-5497-4f7c-9027-2962a7a73085] [user:6870cc61d94fb7565374015f]: Subscription payment initiated successfully
+2025-08-08 11:21:14 [INFO] [logId:e7bb3a62-5497-4f7c-9027-2962a7a73085] [user:6870cc61d94fb7565374015f]: Subscription payment added successfully
+2025-08-08 11:21:14 [INFO] [logId:e7bb3a62-5497-4f7c-9027-2962a7a73085] [user:6870cc61d94fb7565374015f]: Request completed | meta: {"method":"POST","url":"/api/v1/payment/subscription","status":201,"responseTime":"4246.247 ms","ip":"::1","userAgent":"PostmanRuntime/7.44.1","referer":"","requestBody":{"subscriptionId":"68945947a6fe9a3a9231f509"},"query":{},"params":{}}
+2025-08-08 11:27:32 [WARN] [logId:-] [user:guest]: MongoDB disconnected
+2025-08-08 12:27:46 [WARN] [logId:-] [user:guest]: MongoDB disconnected
+2025-08-08 12:45:36 [WARN] [logId:-] [user:guest]: MongoDB disconnected
+2025-08-08 13:34:34 [WARN] [logId:-] [user:guest]: MongoDB disconnected

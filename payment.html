@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Payment Test</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* Tailwind CSS pre-built styles (subset for this project) */
+        :root {
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --indigo-700: #4338ca;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --gray-100: #f3f4f6;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-700: #374151;
+            --red-500: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .bg-gray-100 {
+            background-color: var(--gray-100);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .bg-white {
+            background-color: #fff;
+        }
+
+        .p-8 {
+            padding: 2rem;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .max-w-md {
+            max-width: 28rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .text-gray-700 {
+            color: var(--gray-700);
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .border {
+            border-width: 1px;
+        }
+
+        .border-gray-300 {
+            border-color: var(--gray-300);
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .focus\:outline-none:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        .focus\:ring-indigo-500:focus {
+            --tw-ring-color: var(--indigo-500);
+            box-shadow: 0 0 0 3px var(--tw-ring-color);
+        }
+
+        .focus\:border-indigo-500:focus {
+            border-color: var(--indigo-500);
+        }
+
+        .bg-indigo-600 {
+            background-color: var(--indigo-600);
+        }
+
+        .hover\:bg-indigo-700:hover {
+            background-color: var(--indigo-700);
+        }
+
+        .bg-gray-400 {
+            background-color: var(--gray-400);
+        }
+
+        .cursor-not-allowed {
+            cursor: not-allowed;
+        }
+
+        .bg-green-600 {
+            background-color: var(--green-600);
+        }
+
+        .hover\:bg-green-700:hover {
+            background-color: var(--green-700);
+        }
+
+        .text-white {
+            color: #fff;
+        }
+
+        .text-red-500 {
+            color: var(--red-500);
+        }
+
+        .text-green-500 {
+            color: var(--green-500);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Stripe Elements styles */
+        .StripeElement {
+            box-sizing: border-box;
+            height: 40px;
+            padding: 10px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: 0.375rem;
+            background-color: white;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .StripeElement--focus {
+            border-color: var(--indigo-500);
+            box-shadow: 0 0 0 3px var(--indigo-500);
+            outline: none;
+        }
+
+        .StripeElement--invalid {
+            border-color: var(--red-500);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h1 class="text-2xl font-bold mb-6 text-center">Subscription Payment</h1>
+            <form id="subscriptionForm" class="space-y-4">
+                <div>
+                    <label for="subscriptionId" class="block text-sm font-medium text-gray-700">
+                        Subscription ID
+                    </label>
+                    <input
+                        id="subscriptionId"
+                        type="text"
+                        value="68945947a6fe9a3a9231f509"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                        placeholder="Enter Subscription ID"
+                    />
+                </div>
+                <button
+                    type="submit"
+                    id="submitButton"
+                    class="w-full py-2 px-4 rounded-md text-white font-medium bg-indigo-600 hover:bg-indigo-700"
+                >
+                    Initiate Subscription
+                </button>
+            </form>
+            <form id="paymentForm" class="space-y-4 hidden">
+                <div>
+                    <label for="card-element" class="block text-sm font-medium text-gray-700">
+                        Card Details
+                    </label>
+                    <div id="card-element" class="mt-1"></div>
+                </div>
+                <button
+                    type="submit"
+                    id="confirmPaymentButton"
+                    class="w-full py-2 px-4 rounded-md text-white font-medium bg-green-600 hover:bg-green-700"
+                >
+                    Confirm Payment
+                </button>
+                <p id="errorMessage" class="text-red-500 text-sm hidden"></p>
+                <p id="successMessage" class="text-green-500 text-sm hidden"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const stripe = Stripe('pk_test_51RNv8VQMHY98cw5sbaiT9JDPSw1P7WklCS6uFKJjtX0gxqnIMQfb4jGD7miB4waqv284jimIzkMxVuVxn4ogT9Hq00QNj8Lgsj');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        let clientSecret = null;
+
+        // Mount card element
+        cardElement.mount('#card-element');
+
+        const subscriptionForm = document.getElementById('subscriptionForm');
+        const paymentForm = document.getElementById('paymentForm');
+        const submitButton = document.getElementById('submitButton');
+        const confirmPaymentButton = document.getElementById('confirmPaymentButton');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const subscriptionIdInput = document.getElementById('subscriptionId');
+
+        subscriptionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing...';
+            errorMessage.classList.add('hidden');
+            successMessage.classList.add('hidden');
+            paymentForm.classList.add('hidden');
+
+            try {
+                const response = await fetch('http://localhost:4000/api/v1/payment/subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiNWE4MzYzMDk1ZDIxZDllOWM0YjQiLCJpYXQiOjE3NTQ2MjkwNzEsImV4cCI6MTc1NTIzMzg3MX0.UsC0gtkjDQFWSB9bFg-jL7-T0bgExY2dXNAa6cWrVuo'
+                    },
+                    body: JSON.stringify({ subscriptionId: subscriptionIdInput.value })
+                });
+
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error.message || 'Failed to initiate subscription payment');
+                }
+
+                successMessage.textContent = 'Subscription payment initiated successfully!';
+                successMessage.classList.remove('hidden');
+                
+                if (data.data.clientSecret) {
+                    clientSecret = data.data.clientSecret;
+                    paymentForm.classList.remove('hidden');
+                } else {
+                    successMessage.textContent = 'Free plan activated successfully!';
+                }
+            } catch (err) {
+                errorMessage.textContent = err.message;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Initiate Subscription';
+            }
+        });
+
+        paymentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!clientSecret) return;
+
+            confirmPaymentButton.disabled = true;
+            confirmPaymentButton.textContent = 'Processing...';
+            errorMessage.classList.add('hidden');
+            successMessage.classList.add('hidden');
+
+            try {
+                const { paymentIntent, error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement
+                    }
+                });
+
+                if (stripeError) {
+                    errorMessage.textContent = stripeError.message;
+                    errorMessage.classList.remove('hidden');
+                } else if (paymentIntent.status === 'succeeded') {
+                    successMessage.textContent = 'Payment completed successfully!';
+                    successMessage.classList.remove('hidden');
+                    paymentForm.classList.add('hidden');
+                    clientSecret = null;
+                    cardElement.clear();
+                }
+            } catch (err) {
+                errorMessage.textContent = 'Payment processing failed. Please try again.';
+                errorMessage.classList.remove('hidden');
+            } finally {
+                confirmPaymentButton.disabled = false;
+                confirmPaymentButton.textContent = 'Confirm Payment';
+            }
+        });
+    </script>
+</body>
+</html>

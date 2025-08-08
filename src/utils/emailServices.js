@@ -1,9 +1,12 @@
 // const transporter = require('./emailTransporter');
 import transporter from './emailTransporter.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const sendVerificationEmail = async (toEmail, token) => {
+  console.log('Sending verification email to:', toEmail);
   const mailOptions = {
-    from: `"Your App Team" <${process.env.SMTP_USER}>`,
+    from: `"Your App Team" <${process.env.EMAIL_USER}>`,
     to: toEmail,
     subject: 'Your Email Verification Code',
     html: `
@@ -22,9 +25,10 @@ const sendVerificationEmail = async (toEmail, token) => {
   return transporter.sendMail(mailOptions);
 };
 
+
 const sendPasswordResetEmail = async (toEmail, token) => {
   const mailOptions = {
-    from: `"Your App Team" <${process.env.SMTP_USER}>`,
+    from: `"Your App Team" <${process.env.EMAIL_USER}>`,
     to: toEmail,
     subject: 'Your Password Reset Verification Code',
     html: `

@@ -25,6 +25,7 @@ import {
   UploadPartCommand,
   CompleteMultipartUploadCommand,
   GetObjectCommand,
+  PutObjectCommand,
   DeleteObjectCommand,
   ListMultipartUploadsCommand,
   AbortMultipartUploadCommand,
@@ -35,24 +36,18 @@ import Media from '../../models/Media.js';
 import MediaVariant from '../../models/MediaVariant.js';
 import UserAuth from '../../models/UserAuth.js';
 import { createRequestLogger } from '../../utils/requestLogger.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Initialize S3 client (v3)
 const s3 = new S3Client({
-  region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
+  region: process.env.AWS_REGION
 });
 
 // Initialize MediaConvert client (v3)
 const mediaConvert = new MediaConvertClient({
   region: process.env.AWS_REGION,
-  endpoint: process.env.AWS_MEDIACONVERT_ENDPOINT,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
+  endpoint: process.env.AWS_MEDIACONVERT_ENDPOINT
 });
 
 const initiateUpload = async (userId, { filename, contentType }) => {
@@ -587,18 +582,62 @@ const deleteMedia = async (userId, mediaId) => {
 };
 
 
-const uploadThumbnail = async (userId, mediaId, thumbnailUrl) => {
+// const uploadThumbnail = async (userId, mediaId, thumbnailUrl) => {
+//   const log = createRequestLogger({ userId });
+//   log.info(`Uploading thumbnail for mediaId: ${mediaId}`);
+
+//   const media = await Media.findById(mediaId);
+//   if (!media || media.uploadedBy.toString() !== userId.toString()) {
+//     throw new Error('Media not found or unauthorized');
+//   }
+
+//   media.thumbnailUrl = thumbnailUrl;
+//   await media.save();
+
+//   return media;
+// };
+
+
+
+const initiateThumbnailUpload = async (userId, mediaId, { filename, contentType }) => {
   const log = createRequestLogger({ userId });
-  log.info(`Uploading thumbnail for mediaId: ${mediaId}`);
+  log.info(`Initiating thumbnail upload for mediaId: ${mediaId}, file: ${filename}`);
 
   const media = await Media.findById(mediaId);
-  if (!media || media.uploadedBy.toString() !== userId.toString()) {
-    throw new Error('Media not found or unauthorized');
-  }
+  // if (!media || media.uploadedBy.toString() !== userId.toString()) {
+  //   throw new Error('Media not found or unauthorized');
+  // }
 
+  const key = `thumbnails/${userId}/${mediaId}/${uuidv4()}/${filename}`;
+
+  const command = new PutObjectCommand({
+    Bucket: process.env.AWS_S3_BUCKET,
+    Key: key,
+    ContentType: contentType,
+  });
+
+  const presignedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
+  log.info(`Presigned URL generated for thumbnail upload: ${key}`);
+
+  return { presignedUrl, key };
+};
+
+const uploadThumbnail = async (userId, mediaId, key) => {
+  const log = createRequestLogger({ userId });
+  log.info(`Completing thumbnail upload for mediaId: ${mediaId}`);
+
+  const media = await Media.findById(mediaId);
+  // if (!media || media.uploadedBy.toString() !== userId.toString()) {
+  //   throw new Error('Media not found or unauthorized');
+  // }
+
+  const thumbnailUrl = `${process.env.AWS_S3_BUCKET_URL}/${key}`;
+  console.log(`Thumbnail URL: ${thumbnailUrl}`);
+  console.log("BUCKET URL:", process.env.AWS_S3_BUCKET_URL);
   media.thumbnailUrl = thumbnailUrl;
   await media.save();
 
+  log.info(`Thumbnail URL saved for mediaId: ${mediaId}`);
   return media;
 };
 
@@ -615,4 +654,5 @@ export default {
   deleteMedia,
   uploadThumbnail,
   getAllMediaVariant,
+  initiateThumbnailUpload,
 };

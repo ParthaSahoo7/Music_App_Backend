@@ -19,6 +19,29 @@ router.post(
   mediaController.initiateUploadController
 );
 
+// Initiate thumbnail upload to get presigned URL
+router.post(
+  '/initiate-thumbnail-upload',
+  authorizeUser,
+  [
+    check('mediaId', 'Media ID is required').isMongoId(),
+    check('filename', 'Filename is required').notEmpty(),
+    check('contentType', 'Content Type is required').notEmpty(),
+  ],
+  mediaController.initiateThumbnailUploadController
+);
+
+// Complete thumbnail upload
+router.post(
+  '/thumbnail-upload',
+  authorizeUser,
+  [
+    check('mediaId', 'Media ID is required').isMongoId(),
+    check('key', 'S3 key is required').notEmpty(),
+  ],
+  mediaController.uploadThumbnailController
+);
+
 router.post(
   '/presigned-urls',
   authorizeUser,

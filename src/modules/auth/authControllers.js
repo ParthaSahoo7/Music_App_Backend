@@ -227,7 +227,7 @@ const login = async (req, res) => {
         );
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "7d",
     });
 
@@ -562,7 +562,7 @@ const verifyEmail = async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" }
     );
 
@@ -669,7 +669,7 @@ const verifyPhone = async (req, res) => {
     }
 
     const { countryCode, phoneNumber, otp, token } = req.body;
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const user = await authService.verifyPhoneOTP(decoded.userId, otp, token);
 
     log.info(`Phone verified for user: ${countryCode}${phoneNumber}`);
@@ -730,7 +730,7 @@ const googleAuth = async (req, res) => {
     const user = await authService.googleAuth(payload);
     const token = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" }
     );
 
@@ -801,7 +801,7 @@ const appleAuth = async (req, res) => {
     });
     const token = jwt.sign(
       { userId: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" }
     );
 

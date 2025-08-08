@@ -86,7 +86,7 @@ const sendEmailOTP = async (email) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const token = jwt.sign(
         { userId: user._id, otp },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET_KEY,
         { expiresIn: '10m' }
     );
     return { user, token, otp };
@@ -98,7 +98,7 @@ const verifyEmailOTP = async (userId, otp, token) => {
         throw new Error('User not found');
     }
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         if (decoded.otp !== otp) {
             throw new Error('Invalid OTP');
         }
@@ -121,7 +121,7 @@ const sendPhoneOTP = async (countryCode, phoneNumber) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const token = jwt.sign(
         { userId: user._id, otp },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET_KEY,
         { expiresIn: '10m' }
     );
     return { user, token, otp };
@@ -133,7 +133,7 @@ const verifyPhoneOTP = async (userId, otp, token) => {
         throw new Error('User not found');
     }
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         if (decoded.otp !== otp) {
             throw new Error('Invalid OTP');
         }

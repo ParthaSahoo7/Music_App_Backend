@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thumbnail Upload Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+  <h1>Thumbnail Upload Test</h1>
+  <div class="container">
+    <div class="form-group">
+      <label for="thumbnail">Select Thumbnail Image (PNG):</label>
+      <input type="file" id="thumbnail" accept="image/png">
+    </div>
+    <button onclick="initiateUpload()">Initiate and Upload Thumbnail</button>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const API_BASE_URL = 'http://localhost:4000/api/v1/media'; // Replace with your actual API base URL
+    const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiNWE4MzYzMDk1ZDIxZDllOWM0YjQiLCJpYXQiOjE3NTQxMTI1NzUsImV4cCI6MTc1NDcxNzM3NX0.x5NzMT-VVc-Ox3ZFtXd6HpDK223xMnAtbjLDFsNpOgQ';
+    const MEDIA_ID = '688d9979a9b77cbd9ab641f5';
+    const FILENAME = 'Landing Page Banner 2 (1).png';
+    const CONTENT_TYPE = 'image/png';
+
+    function showStatus(message, isError = false) {
+      const statusDiv = document.getElementById('status');
+      statusDiv.textContent = message;
+      statusDiv.className = isError ? 'error' : 'success';
+      statusDiv.style.display = 'block';
+    }
+
+    async function initiateUpload() {
+      const fileInput = document.getElementById('thumbnail');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        showStatus('Please select a PNG file to upload.', true);
+        return;
+      }
+
+      if (file.type !== 'image/png') {
+        showStatus('Only PNG files are allowed.', true);
+        return;
+      }
+
+      try {
+        showStatus('Initiating thumbnail upload...');
+
+        // Step 1: Initiate thumbnail upload to get presigned URL
+        const initiateResponse = await fetch(`${API_BASE_URL}/initiate-thumbnail-upload`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${AUTH_TOKEN}`,
+          },
+          body: JSON.stringify({
+            mediaId: MEDIA_ID,
+            filename: FILENAME,
+            contentType: CONTENT_TYPE,
+          }),
+        });
+
+        const initiateData = await initiateResponse.json();
+        if (!initiateResponse.ok) {
+          throw new Error(initiateData.error?.message || 'Failed to initiate upload');
+        }
+
+        const { presignedUrl, key } = initiateData.data;
+        showStatus('Presigned URL generated. Uploading file to S3...');
+
+        // Step 2: Upload file to S3 using presigned URL
+        const uploadResponse = await fetch(presignedUrl, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': CONTENT_TYPE,
+          },
+          body: file,
+        });
+
+        if (!uploadResponse.ok) {
+          throw new Error('Failed to upload file to S3');
+        }
+
+        showStatus('File uploaded to S3. Completing thumbnail upload...');
+
+        // Step 3: Complete thumbnail upload
+        const completeResponse = await fetch(`${API_BASE_URL}/thumbnail-upload`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${AUTH_TOKEN}`,
+          },
+          body: JSON.stringify({
+            mediaId: MEDIA_ID,
+            key,
+          }),
+        });
+
+        const completeData = await completeResponse.json();
+        if (!completeResponse.ok) {
+          throw new Error(completeData.error?.message || 'Failed to complete thumbnail upload');
+        }
+
+        showStatus('Thumbnail uploaded successfully! Thumbnail URL: ' + completeData.data.thumbnailUrl);
+      } catch (error) {
+        showStatus(`Error: ${error.message}`, true);
+      }
+    }
+  </script>
+</body>
+</html>
